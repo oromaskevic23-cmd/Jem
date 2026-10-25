@@ -1,0 +1,61 @@
+{
+  "schema": "jem_commercial_proposal_v1",
+  "launchStatus": "NOT_FOR_SALE",
+  "paymentCollection": "DISABLED",
+  "paymentProcessor": "NOT_CONNECTED",
+  "currency": "USD",
+  "billingPeriod": "MONTH",
+  "evidence": "OWNER_PRODUCT_PRICING_TARGET_NOT_MARKET_VALUATION",
+  "developerBudgetUsd": 0,
+  "pricing": [
+    {
+      "plan": "CREATOR",
+      "proposedMonthlyUsd": 149,
+      "position": "personal indie author",
+      "status": "DRAFT_UNAVAILABLE"
+    },
+    {
+      "plan": "STUDIO",
+      "proposedMonthlyUsd": 399,
+      "position": "professional film studio",
+      "status": "DRAFT_UNAVAILABLE"
+    },
+    {
+      "plan": "SIGNATURE",
+      "proposedMonthlyUsd": 999,
+      "position": "premium flagship; higher than observed Pika Fancy max $880/mo as of Oct 2026",
+      "status": "DRAFT_UNAVAILABLE"
+    },
+    {
+      "plan": "ENTERPRISE",
+      "proposedMonthlyUsd": 2499,
+      "position": "proposed entry floor; negotiated commercial contract required",
+      "status": "DRAFT_UNAVAILABLE"
+    }
+  ],
+  "comparison": [
+    {
+      "product": "Runway Max",
+      "publishedMonthlyUsd": 95,
+      "source": "https://runway.com/pricing",
+      "observedAt": "2026-10-25",
+      "notes": "Monthly price; does not include custom Enterprise quote"
+    },
+    {
+      "product": "Pika Fancy",
+      "publishedMaximumMonthlyUsd": 880,
+      "source": "https://pika.art/pricing",
+      "observedAt": "2026-10-25",
+      "notes": "Published upper price for Fancy plan; not all competitors or enterprise quotes"
+    }
+  ],
+  "guardrails": {
+    "noCheckoutUntil": "VERIFIED_AI_CHARACTER_MOTION_AND_BILLING_SECURITY",
+    "noPurchases": "NONE_PROCESSED",
+    "pricingAuthority": "FOUNDER_APPROVAL_REQUIRED",
+    "paidEntitlements": "PRODUCTION_ISSUER_NOT_CONFIGURED",
+    "noAccessClaim": "No subscription sold, billing live or paid feature access activated",
+    "costControl": "Real GPU/inference/storage costs must be measured before sales",
+    "legal": "Store platform rules and taxes reviewed before public release"
+  }
+}
