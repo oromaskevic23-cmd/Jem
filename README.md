@@ -142,6 +142,24 @@ No licensed, verified open-weight I2V model worker has been connected. Mobile vi
 
 For truthful capability boundaries and registry references see [Sprint 004/005 engineering notes](docs/JEM_SPRINT_004_005_MEDIA_SECURITY.md). Both modules remain in Draft PR awaiting owner approval.
 
+
+## Jem🌼 Sprint 007 — CharacterLock + Offline LTX-Video Lab
+
+- **CharacterLock:** Seven immutable character traits, versioned source references, strict reference swaps rejected, independent Ed25519-signed visual QA and no automatic publication authority.
+- **I2V model experiment:** A real offline opt-in adapter for a *manually installed and pinned* LTX-Video 2B inference source, checkpoint and Python execution. Model weights must be supplied, legally reviewed and compatible with the available GPU. **No actual image-to-video inference has been verified or run in repository CI.**
+- **Secure session:** scene contract + Character Bible -> existing durable SQLite queue -> protected evidence dossier; no untrusted synthetic output becomes character-preserving film.
+- **Benchmark readiness:** 20 original six-act stories with **zero fake scores or unauthorized photos**.
+- **Production:** Owner approval still required, public release denied, no payments or app-store deployment.
+
+Local command help:
+
+```bash
+node video/cinema-cli.mjs --help
+npm run cinema:check
+```
+
+See [Sprint 007 exact limits and local inference runbook](docs/JEM_CINEMA_SPRINT_007_RUNBOOK.md). Main is unchanged while this Draft PR is reviewed.
+
 ## Security / privacy
 
 - Localhost-only web server, strict upload/size limits, exact JSON schema and restricted file types; no model network use, paid API, telemetry or advertising.

@@ -27,6 +27,8 @@
     "video:qa": "node --experimental-sqlite --test test/scene-gateway.integration.test.mjs",
     "voice:check": "node --test test/voice.test.mjs",
     "voice:qa": "node --test test/voice.integration.test.mjs",
-    "voice:film": "node factory/cli.mjs --idea \"Pip and Starflower restore the cloud lighthouse and help everyone safely return home\" --theme lighthouse --seconds 60 --output ./originals-output --voice yes"
+    "voice:film": "node factory/cli.mjs --idea \"Pip and Starflower restore the cloud lighthouse and help everyone safely return home\" --theme lighthouse --seconds 60 --output ./originals-output --voice yes",
+    "cinema:check": "node --experimental-sqlite --test test/character-lock.test.mjs test/ltx-offline-worker.test.mjs test/cinema-session.test.mjs",
+    "cinema:verify": "npm run cinema:check && npm run video:check && npm run factory:test"
   }
 }
