@@ -11,7 +11,9 @@ const types=new Map([
  ['/app.mjs',['app.mjs','text/javascript; charset=utf-8']],
  ['/portable-storyboard.mjs',['portable-storyboard.mjs','text/javascript; charset=utf-8']],
  ['/sw.js',['sw.js','text/javascript; charset=utf-8']],
- ['/icon.svg',['icon.svg','image/svg+xml']],\n ['/icon-192.png',['icon-192.png','image/png']],\n ['/icon-512.png',['icon-512.png','image/png']],
+ ['/icon.svg',['icon.svg','image/svg+xml']],
+ ['/icon-192.png',['icon-192.png','image/png']],
+ ['/icon-512.png',['icon-512.png','image/png']],
  ['/manifest.webmanifest',['manifest.webmanifest','application/manifest+json']]
 ]);
 const content=Object.fromEntries([...types].map(([url,[file,type]])=>[url,{
@@ -45,6 +47,7 @@ if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
  const port=Number(process.env.JEM_PWA_PORT||8766);
  if(!Number.isSafeInteger(port)||port<1024||port>65535)throw Error('PWA_PORT_DENIED');
  server.listen(port,'127.0.0.1',()=>{
-  process.stdout.write('Jem🌼 cross-platform preview: http://127.0.0.1:'+port+'\n');
+  process.stdout.write('Jem🌼 cross-platform preview: http://127.0.0.1:'+port+'
+');
  });
 }
