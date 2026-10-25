@@ -34,6 +34,10 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
+      - name: Install Ubuntu repository FFmpeg (runner does not preinstall it)
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg
       - name: Verify local FFmpeg and H.264 encoder (free software)
         run: |
           command -v ffmpeg
