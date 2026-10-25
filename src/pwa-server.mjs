@@ -47,7 +47,6 @@ if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
  const port=Number(process.env.JEM_PWA_PORT||8766);
  if(!Number.isSafeInteger(port)||port<1024||port>65535)throw Error('PWA_PORT_DENIED');
  server.listen(port,'127.0.0.1',()=>{
-  process.stdout.write('Jem🌼 cross-platform preview: http://127.0.0.1:'+port+'
-');
+  process.stdout.write('Jem🌼 cross-platform preview: http://127.0.0.1:'+port+'\n');
  });
 }
