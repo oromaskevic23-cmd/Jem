@@ -74,6 +74,24 @@ Real-media integration tests synthesize a local JPEG fixture, invoke FFmpeg, ren
 5. **Render Farm** — bounded job queue, checkpoints, resumability, budgets, CPU/GPU resource limits, cancel/stop, deterministic hashes and proof-backed exports.
 6. **Review and delivery** — human moderation, approval gateway, consent and IP/license checks, automated integrity tests, output benchmarking and versioned story assets.
 
+
+## iPhone, iPad, Android, Windows, macOS, Linux — PWA v0.2 laboratory
+
+One **portable** scene/storyboard client now lives in **pwa/** and runs in modern secure-context browsers. It hashes the JPG/PNG reference **on-device**, creates a deterministic multi-shot timeline, exports a storyboard JSON, caches only static application files and can be installed as a web app when deployed on an approved HTTPS origin. The PWA is a distinct mode from the desktop video renderer: **phones/tablets cannot render MP4 videos with this increment**.
+
+On a desktop with Node 22+:
+
+```bash
+npm run preview:pwa
+# open http://127.0.0.1:8766
+```
+
+Offline PWA source includes install manifest, real PNG 192/512 icons, iOS home-screen metadata, Android-safe responsive views and a bounded service worker. The mobile experience is **code-complete at a static-source level but not yet physically device-tested or publicly hosted**. No signed .ipa/.apk builds have been made.
+
+**Premium commercial goal:** Paid subscription, including proposed $999/month Jem Signature (above published Runway Max $95/mo and Pika Fancy upper tier $880/mo as checked 2026-10-25). This is an owner-directed **draft price only**. There is **no checkout, no subscription service, no payments, and no paid feature enforcement**. Validation of genuinely superior character animation, production security, economics and App Store/Play Store rules is required before sales.
+
+[Full multi-platform and premium rollout plan](docs/MULTIPLATFORM_PREMIUM_RELEASE.md) · [Nonpurchasable pricing proposal](commerce/pricing.proposal.json)
+
 ## Security / privacy
 
 - Localhost-only web server, strict upload/size limits, exact JSON schema and restricted file types; no model network use, paid API, telemetry or advertising.
