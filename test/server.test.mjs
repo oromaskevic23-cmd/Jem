@@ -1,4 +1,5 @@
 import test from 'node:test';
+import http from 'node:http';
 import assert from 'node:assert/strict';
 import {makeApp} from '../src/server.mjs';
 test('localhost studio serves its real UI and blocks remote-host authority',async()=>{
@@ -20,7 +21,11 @@ test('localhost studio serves its real UI and blocks remote-host authority',asyn
   r=await fetch(base+'/api/render',{method:'POST',
    headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:'unsafe'})});
   assert.equal(r.status,400);
-  r=await fetch(base+'/api/status',{headers:{Host:'evil.example'}});
-  assert.equal(r.status,403);
+  const rejected=await new Promise((resolve,reject)=>{
+   const x=http.get(base+'/api/status',{headers:{Host:'evil.example'}},r=>{
+    r.resume();r.on('end',()=>resolve(r.statusCode));
+   });x.on('error',reject);
+  });
+  assert.equal(rejected,403);
  }finally{app.close()}
 });
