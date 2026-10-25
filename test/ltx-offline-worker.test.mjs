@@ -54,7 +54,7 @@ test('pinned source, checkpoint bytes, commit and configuration are all checked 
   assert.equal(prepareLtxExecution(config).workerKind,'REAL_PINNED_LTX_0_9_8_2B');
   assert.throws(()=>prepareLtxExecution({...config,inferenceSha256:digest('changed')}),/SHA_MISMATCH/);
   assert.throws(()=>prepareLtxExecution({...config,configSha256:digest('changed')}),/SHA_MISMATCH/);
-  assert.throws(()=>prepareLtxExecution({...config,repoCommitSha:digest('wrong')}),/COMMIT_MISMATCH/);
+  assert.throws(()=>prepareLtxExecution({...config,repoCommitSha:digest('wrong').slice(0,40)}),/COMMIT_MISMATCH/);
   assert.throws(()=>prepareLtxExecution({...config,configRelativePath:'../evil.yaml'}),/CONFIG_PATH_DENIED/);
  }finally{rmSync(root,{recursive:true,force:true})}
 });
