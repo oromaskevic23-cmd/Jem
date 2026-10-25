@@ -52,3 +52,25 @@ test('user-provided character reference creates complete pre-production but no f
   assert.deepEqual(JSON.parse(readFileSync(join(task.directory,'production-report.json'),'utf8')).assets,1);
  }finally{rmSync(root,{recursive:true,force:true})}
 });
+
+
+test('full sixty-second auto-written IMPERIAL Kids workshop screenplay renders 480-frame MP4',async()=>{
+ const root=mkdtempSync(join(tmpdir(),'jem-workshop-60s-'));
+ try{
+  const task=await runFilmFactory({
+   idea:'Children learn teamwork by helping Pip repair the town workshop and broken bridge.',
+   theme:'workshop',durationSec:60,outputRoot:root
+  });
+  const media=await inspectEpisode(task.film);
+  assert.equal(media.codec,'h264');
+  assert.equal(media.audioCodec,'aac');
+  assert.equal(media.durationSec,60);
+  assert.equal(media.frames,480);
+  assert.equal(task.screenplay.shots.length,6);
+  assert.equal(task.screenplay.theme,'workshop');
+  assert.equal(task.rendered.manifest.acts[0].caption,'THE TOWN NEEDS OUR HELP');
+  assert.equal(task.rendered.manifest.acts[5].caption,'EVERYONE CELEBRATES TOGETHER');
+  assert.equal(task.result.stages.distribution,'DENIED');
+  assert.equal(task.result.stages.voices,'NOT_GENERATED');
+ }finally{rmSync(root,{recursive:true,force:true})}
+},{timeout:240000});
