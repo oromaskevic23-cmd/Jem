@@ -16,3 +16,8 @@ media/
 *.key
 *.pem
 coverage/
+
+# Locally produced Jem Originals episodes; never commit owner-only film outputs
+originals-output/
+originals/outputs/
+*.wav
