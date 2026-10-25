@@ -27,12 +27,12 @@ function run(binary,args,{timeoutMs=180000}={}){
 }
 export async function probeVideo(file){
  const raw=await run('ffprobe',['-v','error','-select_streams','v:0',
-  '-show_entries','stream=width,height,nb_frames,avg_frame_rate:format=duration',
+  '-show_entries','stream=width,height,codec_name,nb_frames,avg_frame_rate:format=duration',
   '-of','json',file],{timeoutMs:10000});
  const obj=JSON.parse(raw);
  const s=obj.streams?.[0],duration=Number(obj.format?.duration);
  if(!s||!Number.isFinite(duration))throw Error('OUTPUT_VIDEO_INVALID');
- return {width:s.width,height:s.height,frames:Number(s.nb_frames),
+ return {width:s.width,height:s.height,codec:s.codec_name,frames:Number(s.nb_frames),
   fps:s.avg_frame_rate,durationSec:duration};
 }
 async function probeImage(file){
@@ -97,7 +97,7 @@ export async function renderFilm({prompt,photoPath,outputRoot,durationSec=60,
   '-f','concat','-safe','1','-i',join(project,'concat.txt'),
   '-c','copy','-movflags','+faststart',mp4],{timeoutMs:60000});
  const probe=await probeVideo(mp4);
- if(probe.width!==width||probe.height!==height||
+ if(probe.codec!=='h264'||probe.width!==width||probe.height!==height||
   Math.abs(probe.durationSec-durationSec)>Math.max(0.15,2/fps)||
   probe.frames!==durationSec*fps)
   throw Error('FILM_QA_FAILED');
@@ -105,7 +105,7 @@ export async function renderFilm({prompt,photoPath,outputRoot,durationSec=60,
  const report={schema:'jem_render_receipt_v1',renderer:'FFMPEG_OFFLINE_CAMERA_MOTION',
   storyboardSha256:story.storyboardSha256,referenceSha256:image.sha256,
   filmSha256,frames:probe.frames,durationSec:probe.durationSec,
-  width:probe.width,height:probe.height,fps,scenes:story.scenes.length,
+  width:probe.width,height:probe.height,codec:probe.codec,fps,scenes:story.scenes.length,
   verified:'FFPROBE_DURATION_FRAMES_RESOLUTION_AND_SHA256',
   animation:'CAMERA_MOVEMENT_ONLY',characterArticulation:'NOT_AVAILABLE',
   modelInference:'NOT_PERFORMED',audio:'NOT_GENERATED',
