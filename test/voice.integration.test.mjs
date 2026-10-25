@@ -22,7 +22,7 @@ test('one command renders 60-second 2D cartoon WITH real locally synthesized spe
   assert.equal(probed.codec,'h264');
   assert.equal(probed.audioCodec,'aac');
   assert.equal(probed.frames,480);
-  assert.equal(probed.durationSec,60);
+  assert(Math.abs(probed.durationSec-60)<=0.1, 'AAC encoder priming/padding must stay within 100ms');
   const proof=JSON.parse(readFileSync(join(result.directory,'voice-proof.json'),'utf8'));
   assert.equal(proof.method,'OFFLINE_ESPEAK_NG');
   assert.equal(proof.mouthAnimation,'TIMING_ESTIMATE_NOT_PHONEME_LIPSYNC');
