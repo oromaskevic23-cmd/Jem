@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0d1b">
+<meta name="color-scheme" content="dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Jem🌼">
+<meta name="description" content="Jem🌼 private offline storyboard studio: prompt and photo on iPhone, iPad, Android and desktop. Real MP4 rendering is currently desktop-only.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="./icon.svg">
+<title>Jem🌼 — Cartoon & Animation Studio</title>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#f0f3ff;background:#080d1a;scroll-behavior:smooth}
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;background:radial-gradient(ellipse at 90% 0,#26274d 0,transparent 53%),#080d1a}
+button,input,select,textarea{font:inherit}button,input[type=file],select{min-height:48px}
+button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}a{color:#b6a5ff}
+.page{max-width:1110px;margin:auto;padding:max(18px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) calc(42px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0}
+.brand{font-weight:850;letter-spacing:-.06em;font-size:30px}
+.eyebrow{font-size:11px;letter-spacing:.13em;font-weight:750;color:#8ce6d5}
+.badge{border:1px solid #535679;color:#c2c7e7;padding:8px 13px;border-radius:999px;font-size:12px}
+h1{font-size:clamp(36px,5.7vw,70px);line-height:1.07;letter-spacing:-.06em;margin:12px 0 18px;max-width:760px}
+h1 strong{color:#bea5ff}.lead{color:#afbad2;line-height:1.7;font-size:clamp(15px,2vw,19px);max-width:700px}
+.hero{padding:48px 0 34px;display:grid;grid-template-columns:1.4fr .8fr;gap:26px;align-items:center}
+.flower{font-size:clamp(82px,14vw,155px);text-align:center;filter:drop-shadow(0 0 35px #8d6bea);animation:float 7s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px) rotate(12deg)}}
+.hero-art{background:linear-gradient(145deg,#2c3261,#121729);border-radius:28px;padding:28px;border:1px solid #555b89;min-height:220px;display:grid;align-content:center}
+.hero-art p{font-weight:650;text-align:center;color:#ddd7ff;margin:5px}
+.card{background:#111a2b;border:1px solid #2d3a59;border-radius:22px;padding:clamp(18px,3vw,30px);box-shadow:0 20px 60px #0006}
+.card h2{font-size:clamp(22px,3vw,28px);margin:0 0 9px}.muted{color:#a7b6d0;line-height:1.6}
+.fields{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px}.field{min-width:0}
+label{display:block;font-size:13px;color:#cfdaef;font-weight:700;margin:0 0 10px}
+textarea,input[type=file],select{display:block;width:100%;max-width:100%;background:#070d1b;color:#f4f6ff;border:1px solid #455778;border-radius:14px;padding:13px}
+textarea{resize:vertical;min-height:190px;line-height:1.5}
+textarea:focus-visible,input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #a991fc;outline-offset:3px}
+select{margin-bottom:12px}.hint{font-size:12px;line-height:1.6;color:#9faeca}
+.pillrow{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0}
+.pill{font-size:12px;color:#9fdac5;border:1px solid #416b73;padding:6px 11px;border-radius:100px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.primary,.secondary,.link-button{border-radius:13px;border:0;padding:14px 22px;font-weight:800;min-height:49px;text-decoration:none;display:inline-flex;justify-content:center;align-items:center}
+.primary{color:#fff;background:linear-gradient(110deg,#7952f1,#9771f1)}
+.secondary,.link-button{background:#263453;border:1px solid #4c6286;color:#f1efff}
+.status{white-space:pre-wrap;line-height:1.5;color:#e2e2ff;background:#1a2944;padding:14px;margin:20px 0 0;border-radius:12px}
+#photo-preview{display:block;max-height:240px;max-width:100%;object-fit:contain;border-radius:13px;margin:12px 0;border:1px solid #415575}
+#results{margin-top:24px;border-top:1px solid #334464;padding-top:20px}
+#results h3{margin:0 0 14px}.scenegrid{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.scenegrid li{border:1px solid #394764;border-radius:13px;padding:14px;background:#101729;min-width:0}
+.scenegrid strong,.scenegrid span{display:block}.scenegrid strong{color:#cbbdff;margin-bottom:8px}
+.scenegrid span{color:#acb9d0;font-size:12px;line-height:1.5}
+.price{margin-top:22px;border-top:1px solid #334464;padding-top:20px}
+.notice{font-size:13px;color:#aebcd9;line-height:1.8;margin-top:27px}
+#install{display:none}
+@media(max-width:790px){.hero,.fields{grid-template-columns:1fr}.hero{padding-top:28px}.hero-art{min-height:150px}.scenegrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.page{padding-left:14px;padding-right:14px}.card{padding:17px}.scenegrid{grid-template-columns:1fr}.actions button{width:100%}.badge{font-size:10px}.hero-art{min-height:125px}.flower{font-size:65px}.hero-art p{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.flower{animation:none}}
+</style>
+</head>
+<body>
+<div class="page">
+<nav><div class="brand">Jem🌼</div><div class="badge">MULTI-DEVICE · LAB v0.2</div></nav>
+<section class="hero">
+<div><div class="eyebrow">IMPERIAL CORE · STORY & VIDEO STUDIO</div>
+<h1>One story. <strong>Any screen.</strong></h1>
+<p class="lead">Plan a 60-second animated story from a prompt and a photo on iPhone, iPad, Android phones and tablets, or desktop. Keep the image on your device and download the scene plan.</p>
+<div class="pillrow"><span class="pill">iPhone · iPad</span><span class="pill">Android</span><span class="pill">Windows · Mac · Linux</span><span class="pill">Offline storyboarding</span></div>
+</div><div class="hero-art"><div class="flower" aria-hidden="true">🌼</div><p>Visual identity starts with your original photo.</p></div>
+</section>
+<section class="card">
+<h2>Create your storyboard</h2>
+<p class="muted">No account, credit card or server upload. Offline planning is available after the application is loaded once. Full MP4 rendering currently requires the separate desktop FFmpeg edition.</p>
+<form id="make-story">
+<div class="fields">
+<div class="field"><label for="prompt">Your story prompt</label>
+<textarea id="prompt" required minlength="12" maxlength="1000" placeholder="A brave explorer finds a glowing flower in an enchanted forest, saves a tiny robot, and returns home."></textarea></div>
+<div class="field"><label for="photo">Reference photo · JPG / PNG · up to 12 MB</label>
+<input id="photo" type="file" accept="image/jpeg,image/png" required>
+<img id="photo-preview" alt="Local preview of the selected image" hidden>
+<p class="hint">The app creates a SHA-256 fingerprint of the original photo. It does not identify people or generate new poses.</p>
+<label for="duration">Story length</label>
+<select id="duration"><option value="4">4 seconds · quick storyboard</option><option value="10">10 seconds</option><option value="30">30 seconds</option><option value="60" selected>60 seconds · six scenes</option></select>
+</div>
+</div>
+<div class="actions"><button id="plan" class="primary" type="submit">Create storyboard</button>
+<button id="install" class="secondary" type="button">Install Jem🌼</button></div>
+<div id="status" class="status" role="status" aria-live="polite">Ready for your story. Local rendering of actual MP4 is available in the desktop edition only.</div>
+</form>
+<div id="results" hidden>
+<h3 id="scene-heading">Your scene plan</h3>
+<ol id="scene-list" class="scenegrid"></ol>
+<div class="actions"><button id="export" class="secondary" type="button">Download storyboard JSON</button></div>
+<p id="integrity" class="hint"></p>
+</div>
+<div class="price"><strong>Jem🌼 Premium — commercial plans planned</strong><p class="hint">Paid plans and licensed generative AI video will require a verified backend and secure payment processing. Current offline storyboard lab is not a purchasable subscription. No payments are accepted here.</p></div>
+</section>
+<p class="notice">**Platform disclosure:** This is an installable web-app foundation, not a signed App Store / Play Store binary. iOS/iPadOS users may use Safari → Share → Add to Home Screen on an HTTPS deployment; supported Android browsers may offer Install app. GitHub source is not itself a hosted deployment. Development and client billing are distinct.</p>
+</div>
+<script type="module" src="./app.mjs"></script>
+</body>
+</html>
