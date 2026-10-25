@@ -13,7 +13,7 @@ import {verifyRuntimeModel} from './model-registry.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const json=x=>JSON.stringify(x);
 const hashRequest=x=>sha(json(x));
-const RESULTS=new Set(['BLOCKED_MODEL_NOT_AVAILABLE','BLOCKED_REFERENCE_PRESERVATION_UNVERIFIED',
+const RESULTS=new Set(['PENDING_VALIDATION','BLOCKED_MODEL_NOT_AVAILABLE','BLOCKED_REFERENCE_PRESERVATION_UNVERIFIED',
  'BLOCKED_SAFETY_POLICY','BLOCKED_RUNTIME_LIMIT','REVIEW_REQUIRED']);
 async function inspectClip(path){
  return new Promise((ok,no)=>{
@@ -51,6 +51,8 @@ export class SceneReviewQueue{
   this.db=new DatabaseSync(databasePath);
   this.db.exec('PRAGMA journal_mode=WAL; PRAGMA busy_timeout=5000;');
   this.db.exec("CREATE TABLE IF NOT EXISTS scene_jobs (mission_id TEXT PRIMARY KEY, request_sha TEXT NOT NULL, state TEXT NOT NULL, model_id TEXT, clip_sha TEXT, reason TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+  // On restart, incomplete work is denied instead of mislabeled as human-reviewed.
+  this.db.prepare("UPDATE scene_jobs SET state='BLOCKED_RUNTIME_LIMIT',reason='INTERRUPTED_JOB_REQUIRES_NEW_MISSION',updated_at=CURRENT_TIMESTAMP WHERE state='PENDING_VALIDATION'").run();
  }
  close(){this.db.close()}
  status(missionId){
@@ -58,7 +60,7 @@ export class SceneReviewQueue{
  }
  record(missionId,requestSha,state,reason,clipSha=null){
   if(!RESULTS.has(state))throw Error('STATE_DENIED');
-  this.db.prepare("UPDATE scene_jobs SET state=?,reason=?,clip_sha=?,updated_at=CURRENT_TIMESTAMP WHERE mission_id=? AND request_sha=?")
+  this.db.prepare("UPDATE scene_jobs SET state=?,reason=?,clip_sha=?,updated_at=CURRENT_TIMESTAMP WHERE mission_id=? AND request_sha=? AND state='PENDING_VALIDATION'")
    .run(state,reason,clipSha,missionId,requestSha);
   return {...this.status(missionId),production:'DENIED',publish:'OWNER_REVIEW_REQUIRED'};
  }
@@ -67,7 +69,7 @@ export class SceneReviewQueue{
   const requestSha=hashRequest(request),missionId=request.missionId+'-'+request.shotId;
   let inserted;
   try{inserted=this.db.prepare('INSERT OR IGNORE INTO scene_jobs (mission_id,request_sha,state,model_id,reason) VALUES (?, ?, ?, ?, ?)')
-   .run(missionId,requestSha,'REVIEW_REQUIRED',this.model?.id??null,'INTAKE_ONLY').changes===1}
+   .run(missionId,requestSha,'PENDING_VALIDATION',this.model?.id??null,'INTAKE_PENDING_VIDEO_VALIDATION').changes===1}
   catch{throw Error('SCENE_LEDGER_UNAVAILABLE')}
   const old=this.status(missionId);
   if(!inserted) {
