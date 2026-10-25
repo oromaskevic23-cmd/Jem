@@ -10,6 +10,8 @@ on:
       - 'test/film-benchmark.test.mjs'
       - 'benchmarks/film-benchmark-v1.json'
       - 'package.json'
+      - 'README.md'
+      - 'docs/JEM_CINEMA_SPRINT_007_RUNBOOK.md'
       - '.github/workflows/jem-cinema-s007.yml'
   pull_request:
     paths:
