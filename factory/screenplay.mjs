@@ -82,7 +82,7 @@ export function writeScreenplay({idea,theme='auto',language='en',durationSec=60,
   continuity:'SAME_FIXED_CHARACTER_BIBLE_ALL_SCENES'
  }));
  const draft={schema:'jem_screenplay_v1',producer:'IMPERIAL Core — Jem🌼 Originals',
-  series:'IMPERIAL Kids',title,world,idea,language,
+  series:'IMPERIAL Kids',title,world,theme:world,idea,language,
   format:'TEMPLATE_GENERATED_SIX_ACT_CARTOON',generator:'DETERMINISTIC_NOT_LLM',
   seconds:durationSec,fps:8,logline:title+': '+idea,
   moral:'Friends solve big challenges through kindness, courage and teamwork.',
