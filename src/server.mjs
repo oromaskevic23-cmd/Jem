@@ -10,7 +10,9 @@ import {validateImageBytes} from './storyboard.mjs';
 
 const MAX_BODY=17*1024*1024;
 const BASE='http://127.0.0.1';
-const page=readFileSync(join(dirname(fileURLToPath(import.meta.url)),'ui.html'),'utf8');
+const assetDir=dirname(fileURLToPath(import.meta.url));
+const page=readFileSync(join(assetDir,'ui.html'),'utf8');
+const uiScript=readFileSync(join(assetDir,'ui.js'),'utf8');
 function reply(res,code,obj){res.writeHead(code,{'Content-Type':'application/json; charset=utf-8',
  'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});
  res.end(JSON.stringify(obj));}
@@ -37,6 +39,11 @@ export function makeApp(){
     'Cache-Control':'no-store','X-Content-Type-Options':'nosniff',
     'Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"});
    return res.end(page);
+  }
+  if(req.method==='GET'&&pathname==='/app.js'){
+   res.writeHead(200,{'Content-Type':'text/javascript; charset=utf-8',
+    'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});
+   return res.end(uiScript);
   }
   if(req.method==='GET'&&pathname==='/api/status'){
    return reply(res,200,{schema:'jem_lab_status_v1',mode:'OFFLINE_CAMERA_MOTION',busy,
