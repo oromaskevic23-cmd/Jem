@@ -128,8 +128,14 @@ function flower(g,p){
  if(p.act===2)g.line(x-3,y+3,x+3,y+3,1,C.ink);
  else g.circle(x,y+3,2.2,C.ink);
 }
-export function drawFrame(manifest,frame){
- const {act}=stageAtFrame(manifest,frame),pose=poseAtFrame(manifest,frame);
+export function drawFrame(manifest,frame,{voiceCues=null}={}){
+ const {act}=stageAtFrame(manifest,frame);
+ let pose=poseAtFrame(manifest,frame);
+ if(Array.isArray(voiceCues)){
+  const t=frame/manifest.fps;
+  const speech=voiceCues.some(x=>t>=x.fromSec&&t<x.endSec);
+  pose={...pose,mouthOpen:speech?Math.floor(t*9)%2===0:false};
+ }
  const g=canvas(manifest.width,manifest.height);
  landscape(g,pose.act);flower(g,pose);robot(g,pose);
  g.rect(0,0,320,14,C.dark);
