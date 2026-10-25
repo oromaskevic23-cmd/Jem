@@ -34,6 +34,7 @@ jobs:
           node --check factory/screenplay.mjs
           node --check factory/pipeline.mjs
           node --check factory/cli.mjs
+          node --check factory/local-ollama.mjs
           node --check originals/draw.mjs
           node --check originals/render.mjs
           npm run factory:test
