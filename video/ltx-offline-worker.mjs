@@ -5,11 +5,16 @@
  */
 import {spawn,spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {mkdtempSync,mkdirSync,realpathSync,statSync,readFileSync,readdirSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,realpathSync,statSync,readdirSync,openSync,readSync,closeSync} from 'node:fs';
 import {resolve,join,sep} from 'node:path';
 import {assertSceneRequest} from './scene-contract.mjs';
 import {verifyRuntimeModel} from './model-registry.mjs';
-const sha=f=>createHash('sha256').update(readFileSync(f)).digest('hex');
+function sha(file){
+ const digest=createHash('sha256'),fd=openSync(file,'r'),buffer=Buffer.allocUnsafe(1024*1024);
+ try{let n;while((n=readSync(fd,buffer,0,buffer.length,null))>0)digest.update(buffer.subarray(0,n))}
+ finally{closeSync(fd)}
+ return digest.digest('hex');
+}
 const HEX=/^[a-f0-9]{64}$/, GIT_SHA=/^[a-f0-9]{40}$/;
 const ID=/^[A-Za-z0-9][A-Za-z0-9_.-]{2,80}$/;
 function fileUnderRoot(path,root){
