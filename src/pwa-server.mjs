@@ -11,7 +11,7 @@ const types=new Map([
  ['/app.mjs',['app.mjs','text/javascript; charset=utf-8']],
  ['/portable-storyboard.mjs',['portable-storyboard.mjs','text/javascript; charset=utf-8']],
  ['/sw.js',['sw.js','text/javascript; charset=utf-8']],
- ['/icon.svg',['icon.svg','image/svg+xml']],
+ ['/icon.svg',['icon.svg','image/svg+xml']],\n ['/icon-192.png',['icon-192.png','image/png']],\n ['/icon-512.png',['icon-512.png','image/png']],
  ['/manifest.webmanifest',['manifest.webmanifest','application/manifest+json']]
 ]);
 const content=Object.fromEntries([...types].map(([url,[file,type]])=>[url,{
