@@ -10,7 +10,7 @@ import {resolve,join,sep} from 'node:path';
 import {assertSceneRequest} from './scene-contract.mjs';
 import {verifyRuntimeModel} from './model-registry.mjs';
 const sha=f=>createHash('sha256').update(readFileSync(f)).digest('hex');
-const HEX=/^[a-f0-9]{64}$/;
+const HEX=/^[a-f0-9]{64}$/, GIT_SHA=/^[a-f0-9]{40}$/;
 const ID=/^[A-Za-z0-9][A-Za-z0-9_.-]{2,80}$/;
 function fileUnderRoot(path,root){
  const p=realpathSync(path),dir=realpathSync(root);
@@ -49,7 +49,7 @@ export function prepareLtxExecution({
  const model=verifyRuntimeModel(modelManifest);
  if(model.id!=='ltx-video-2b-distilled'||operatorApproved!==true)
   throw Error('LOCAL_RUNTIME_OPERATOR_APPROVAL_REQUIRED');
- if(!HEX.test(repoCommitSha||'')||!HEX.test(inferenceSha256||'')||
+ if(!GIT_SHA.test(repoCommitSha||'')||!HEX.test(inferenceSha256||'')||
   !HEX.test(configSha256||'')||!ID.test(configRelativePath?.split('/').at(-1)?.replace('.yaml','')||''))
   throw Error('LOCAL_RUNTIME_PINS_DENIED');
  if(typeof configRelativePath!=='string'||!/^[a-zA-Z0-9_./-]+\.yaml$/.test(configRelativePath)||
