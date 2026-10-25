@@ -1,18 +1,19 @@
 {
   "name": "jem-ai-cartoon-animation-studio",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "Jem🌼 verified offline video animation lab — reference photo + prompt -> real MP4 camera-motion scenes; not a generative video model",
+  "description": "Jem🌼 cross-platform PWA offline storyboard plus desktop-verified MP4 camera-motion lab; paid flagship price proposal, no billing or generative video model",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "check": "node --check src/storyboard.mjs && node --check src/render.mjs && node --check src/cli.mjs && node --check src/server.mjs",
-    "test": "node --test test/storyboard.test.mjs test/server.test.mjs",
+    "check": "node --check src/storyboard.mjs && node --check src/render.mjs && node --check src/cli.mjs && node --check src/server.mjs && node --check src/pwa-server.mjs && node --check pwa/portable-storyboard.mjs && node --check pwa/app.mjs && node --check pwa/sw.js",
+    "test": "node --test test/storyboard.test.mjs test/server.test.mjs test/pwa.test.mjs",
     "test:media": "node --test test/render.integration.test.mjs",
     "verify": "npm run check && npm test && npm run test:media",
     "start": "node src/server.mjs",
-    "render": "node src/cli.mjs"
+    "render": "node src/cli.mjs",
+    "preview:pwa": "node src/pwa-server.mjs"
   }
 }
