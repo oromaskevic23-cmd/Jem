@@ -123,6 +123,25 @@ An already-installed local Ollama model can optionally suggest a screenplay with
 
 See [FilmFactory instructions](docs/JEM_FILMFACTORY_PRODUCTION.md) and the [seven IMPERIAL Kids series concepts](docs/IMPERIAL_KIDS_FILMFACTORY_SLATE.md).
 
+
+## Sprints 004–005 — Real scene admission + voices and timed mouth motion
+
+**New engineering:** Strict `video/scene-contract.mjs` image-to-video request, model-license/weight pinning gates, SQLite-backed scene review ledger and actual FFprobe media validation. Synthetic-output contract tests **do not** constitute true generative image-to-video inference. All scene/video results are **BLOCKED** or **REVIEW_REQUIRED**, never automatically released.
+
+**Voice integration:** On the already implemented original Pip/Starflower 2D short, real local **eSpeak NG** speech can be generated for six scripted English lines, placed in the right scenes, mixed into the original score, and mapped to timed mouth-open/close frames. This is *approximate speaking-window animation*, **not phoneme-accurate lip-sync** or a real human voice clone.
+
+To render the experimental 60-second spoken cartoon locally (Node.js 22+, FFmpeg/FFprobe and eSpeak NG installed):
+
+```sh
+npm run video:check
+npm run voice:check
+npm run voice:film
+```
+
+No licensed, verified open-weight I2V model worker has been connected. Mobile video rendering, actual animation of the specific owner-supplied 3D poster characters, multilingual speech and release/payment remain **unavailable**.
+
+For truthful capability boundaries and registry references see [Sprint 004/005 engineering notes](docs/JEM_SPRINT_004_005_MEDIA_SECURITY.md). Both modules remain in Draft PR awaiting owner approval.
+
 ## Security / privacy
 
 - Localhost-only web server, strict upload/size limits, exact JSON schema and restricted file types; no model network use, paid API, telemetry or advertising.
