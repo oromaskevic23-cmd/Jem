@@ -92,6 +92,22 @@ Offline PWA source includes install manifest, real PNG 192/512 icons, iOS home-s
 
 [Full multi-platform and premium rollout plan](docs/MULTIPLATFORM_PREMIUM_RELEASE.md) · [Nonpurchasable pricing proposal](commerce/pricing.proposal.json)
 
+
+## 🎬 Jem🌼 Originals — our own cartoon and film studio (technical pilot)
+
+**New:** **Pip and the Starflower**, an original six-act 60-second animated short with two new fictional characters, frame-by-frame procedural moving limbs, blinking/mouth expressions, original synthesized instrumental soundtrack, six SRT subtitle cues, real 480-frame H.264/AAC MP4 and independent FFprobe SHA-256 proof receipts. This is actual **2D animation with fixed camera**, not a photograph zoom montage.
+
+Generate the 60-second cartoon locally (Node.js 22+, free FFmpeg and FFprobe installed):
+
+~~~bash
+npm run originals:verify
+npm run originals:film
+~~~
+
+The pilot uses no AI generative video model, pre-trained image-to-video weights, borrowed music or voice synthesizer. It is a **working first production proof**, not a finished AI feature film and not proof of superior animation quality.
+
+See [Originals Film Studio Production Standard](docs/JEM_ORIGINALS_STUDIO.md). This is a **stacked Draft PR** based on Jem Enterprise PR #1. Public distribution and monetization require separate owner approval.
+
 ## Security / privacy
 
 - Localhost-only web server, strict upload/size limits, exact JSON schema and restricted file types; no model network use, paid API, telemetry or advertising.
