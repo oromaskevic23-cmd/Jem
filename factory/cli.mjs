@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /** Jem🌼 FilmFactory one-command local production (no internet/credentials/payments). */
 import {runFilmFactory} from './pipeline.mjs';
-const accepted=new Set(['--idea','--output','--theme','--seconds','--photo','--confirm-photo-rights','--ollama-model']);
+const accepted=new Set(['--idea','--output','--theme','--seconds','--photo','--confirm-photo-rights','--ollama-model','--voice']);
 const args=process.argv.slice(2),cfg={photoPaths:[]},seen=new Set();
 if(args.length===1&&args[0]==='--help'){
- process.stdout.write('Jem🌼 FilmFactory: --idea "A friendship rescue in a forest" --output ./films [--theme forest] [--seconds 60] [--photo ./reference.jpg --confirm-photo-rights yes]\nFor optional locally hosted AI drafting add --ollama-model qwen2.5:3b. Photo mode creates only a screenplay and shot plan until genuine image-to-video is connected. No paid API, release or publication.\n');
+ process.stdout.write('Jem🌼 FilmFactory: --idea "A friendship rescue in a forest" --output ./films [--theme forest] [--seconds 60] [--photo ./reference.jpg --confirm-photo-rights yes]\nFor optional locally hosted AI drafting add --ollama-model qwen2.5:3b, and --voice yes for optional offline English eSpeak. Photo mode creates only a screenplay and shot plan until genuine image-to-video is connected. No paid API, release or publication.\n');
 }else{
  try{
   for(let i=0;i<args.length;i+=2){
@@ -15,6 +15,10 @@ if(args.length===1&&args[0]==='--help'){
    if(flag==='--idea')cfg.idea=value;
    if(flag==='--output')cfg.outputRoot=value;
    if(flag==='--ollama-model')cfg.ollamaModel=value;
+   if(flag==='--voice'){
+    if(value!=='yes')throw Error('VOICE_FLAG_MUST_BE_YES');
+    cfg.voiceEnabled=true;
+   }
    if(flag==='--theme')cfg.theme=value;
    if(flag==='--seconds'){
     if(!/^(6|12|18|24|30|36|42|48|54|60)$/.test(value))throw Error('DURATION_DENIED');

@@ -6,6 +6,8 @@ import {readFileSync,writeFileSync,mkdirSync,mkdtempSync,statSync} from 'node:fs
 import {resolve,join} from 'node:path';
 import {writeScreenplay,compileRigFilm} from './screenplay.mjs';
 import {useLocalScreenplayModel} from './local-ollama.mjs';
+import {buildDialogueAssets,mixSpokenFilm} from '../voice/dialogue.mjs';
+import {inspectEpisode} from '../originals/render.mjs';
 import {renderOriginals} from '../originals/render.mjs';
 import {validateImageBytes} from '../src/storyboard.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
@@ -76,26 +78,47 @@ export async function runFilmFactory(config={}){
   return {...planning,result:blocked,film:null};
  }
  const rig=compileRigFilm(screenplay);
+ if(config.voiceEnabled&&screenplay.seconds<30)throw Error('VOICE_REQUIRES_AT_LEAST_30_SECONDS');
+ const voice=config.voiceEnabled?await buildDialogueAssets(screenplay,
+  {outputRoot:join(directory,'speech')}):null;
  const rendered=await renderOriginals({outputRoot:directory,
-  seconds:screenplay.seconds,fps:8,scriptedManifest:rig});
+  seconds:screenplay.seconds,fps:8,scriptedManifest:rig,
+  voiceCues:voice?.voices??null});
  const receipt=rendered.receipt;
  if(receipt.manifestSha256!==rig.manifestSha256||
   receipt.frames!==screenplay.seconds*8||
   receipt.durationSec<screenplay.seconds-.18||
   receipt.actualAnimatedMotion!=='PROCEDURAL_2D_POSE_AND_LIMB_ANIMATION')
   throw Error('FACTORY_RENDER_VALIDATION_DENIED');
+ let finalFilm=rendered.film,finalFilmHash=receipt.filmSha256;
+ if(voice){
+  finalFilm=join(directory,'jem-film-with-speech.mp4');
+  await mixSpokenFilm({sourceMp4:rendered.film,assets:voice,outputMp4:finalFilm});
+  const qa=await inspectEpisode(finalFilm);
+  if(qa.codec!=='h264'||qa.audioCodec!=='aac'||qa.frames!==screenplay.seconds*8||
+   Math.abs(qa.durationSec-screenplay.seconds)>.2)throw Error('VOICED_VIDEO_QA_DENIED');
+  finalFilmHash=sha(readFileSync(finalFilm));
+  encode(join(directory,'voice-proof.json'),{
+   schema:'jem_voice_proof_v1',screenplaySha256:screenplay.screenplaySha256,
+   finalFilmSha256:finalFilmHash,codec:'aac',
+   method:'OFFLINE_ESPEAK_NG',segments:voice.voices.map(({index,fromSec,endSec,spokenBy})=>
+    ({index,fromSec,endSec,spokenBy})),
+   mouthAnimation:'TIMING_ESTIMATE_NOT_PHONEME_LIPSYNC',
+   voiceImpersonation:'NONE',release:'OWNER_REVIEW_REQUIRED'
+  });
+ }
  const result={schema:'jem_factory_result_v1',
   screenplaySha256:screenplay.screenplaySha256,
   manifestSha256:rig.manifestSha256,
-  filmSha256:receipt.filmSha256,
+  filmSha256:finalFilmHash,
   status:'PROCEDURAL_2D_FILM_READY_FOR_OWNER_REVIEW',
-  videoPath:rendered.film,
+  videoPath:finalFilm,
   stages:{screenplay:'DRAFTED',shotPlan:'DRAFTED',references:'NONE',
-   animation:'PROCEDURAL_PRESET_RIG',voices:'NOT_GENERATED',
+   animation:'PROCEDURAL_PRESET_RIG',voices:voice?'OFFLINE_ESPEAK_NG':'NOT_GENERATED',
    soundtrack:'ORIGINAL_INSTRUMENTAL',film:'MP4_VERIFIED',distribution:'DENIED'},
-  runtimeVoice:'NONE',generativeAI:'NOT_CONNECTED',
+  runtimeVoice:voice?'SYNTHETIC_ESPEAK_NG_TIMED':'NONE',generativeAI:'NOT_CONNECTED',
   screenplaySource:screenplay.generator,
   finalQuality:'OWNER_REVIEW_REQUIRED',ownerApproval:'REQUIRED'};
  encode(join(directory,'production-report.json'),result);
- return {...planning,result,film:rendered.film,rendered};
+ return {...planning,result,film:finalFilm,rendered,voice};
 }

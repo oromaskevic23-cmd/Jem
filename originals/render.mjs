@@ -45,7 +45,7 @@ export async function inspectEpisode(file){
   codec:video.codec_name,audioCodec:audio.codec_name,
   width:video.width,height:video.height,fps:video.r_frame_rate};
 }
-export async function renderOriginals({outputRoot,seconds=60,fps=8,scriptedManifest=null}={}){
+export async function renderOriginals({outputRoot,seconds=60,fps=8,scriptedManifest=null,voiceCues=null}={}){
  if(typeof outputRoot!=='string'||!outputRoot.trim())throw Error('OUTPUT_ROOT_REQUIRED');
  const manifest=scriptedManifest??createPilot({seconds,fps});
  if(scriptedManifest){
@@ -70,7 +70,7 @@ export async function renderOriginals({outputRoot,seconds=60,fps=8,scriptedManif
  const sound=writeWav(wav,{seconds});
  writeFileSync(join(folder,'episode.json'),JSON.stringify(manifest,null,2)+'\n');
  writeFileSync(join(folder,'subtitles.srt'),toSrt(manifest));
- function* frames(){for(let i=0;i<seconds*fps;i++)yield drawFrame(manifest,i)}
+ function* frames(){for(let i=0;i<seconds*fps;i++)yield drawFrame(manifest,i,{voiceCues})}
  await processExit('ffmpeg',['-hide_banner','-loglevel','error','-nostdin','-y',
   '-f','rawvideo','-pixel_format','rgb24','-video_size',
   manifest.width+'x'+manifest.height,
