@@ -45,9 +45,24 @@ export async function inspectEpisode(file){
   codec:video.codec_name,audioCodec:audio.codec_name,
   width:video.width,height:video.height,fps:video.r_frame_rate};
 }
-export async function renderOriginals({outputRoot,seconds=60,fps=8}={}){
+export async function renderOriginals({outputRoot,seconds=60,fps=8,scriptedManifest=null}={}){
  if(typeof outputRoot!=='string'||!outputRoot.trim())throw Error('OUTPUT_ROOT_REQUIRED');
- const manifest=createPilot({seconds,fps});
+ const manifest=scriptedManifest??createPilot({seconds,fps});
+ if(scriptedManifest){
+  if(manifest.schema!=='jem_originals_episode_v1'||manifest.seconds!==seconds||
+   manifest.fps!==fps||manifest.width!==320||manifest.height!==180||
+   !Array.isArray(manifest.acts)||manifest.acts.length!==6||
+   manifest.characterBible?.protagonist?.id!=='PIP-001'||
+   manifest.characterBible?.companion?.id!=='STARFLOWER-001')
+    throw Error('RIG_MANIFEST_DENIED');
+  const copy={...manifest};delete copy.manifestSha256;
+  if(manifest.manifestSha256!==sha(JSON.stringify(copy))||
+   manifest.acts.some((a,i)=>a.startFrame!==i*seconds*fps/6||
+    a.frames!==seconds*fps/6||
+    typeof a.caption!=='string'||a.caption.length>39||
+    !/^[A-Z0-9 !?.'-]+$/.test(a.caption)))
+    throw Error('RIG_MANIFEST_INTEGRITY_DENIED');
+ }
  mkdirSync(resolve(outputRoot),{recursive:true,mode:0o700});
  const folder=mkdtempSync(join(resolve(outputRoot),'jem-originals-'));
  const film=join(folder,'jem-originals-pip-starflower.mp4'),

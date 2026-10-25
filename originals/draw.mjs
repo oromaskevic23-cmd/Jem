@@ -133,7 +133,7 @@ export function drawFrame(manifest,frame){
  const g=canvas(manifest.width,manifest.height);
  landscape(g,pose.act);flower(g,pose);robot(g,pose);
  g.rect(0,0,320,14,C.dark);
- g.text('JEM ORIGINALS  -  PIP AND THE STARFLOWER',8,2,C.gold,2);
+ g.text('JEM ORIGINALS - '+manifest.title.toUpperCase().replace(/[^A-Z0-9 ]/g,'').slice(0,19),8,2,C.gold,2);
  g.rect(0,154,320,26,C.dark);
  g.text(act.caption,Math.max(3,Math.floor((320-act.caption.length*8)/2)),161,C.white,2);
  return g.pixels;
