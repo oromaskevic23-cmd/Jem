@@ -67,3 +67,21 @@ test('fake worker success cannot provide arbitrary output, unknown model or pre-
   q.close();
  }finally{rmSync(dir,{recursive:true,force:true})}
 });
+
+
+test('process restart converts unfinished synthetic job to safe BLOCKED, not review authority',()=>{
+ const dir=mkdtempSync(join(tmpdir(),'jem-crash-recovery-'));
+ try{
+  const db=join(dir,'jobs.sqlite'),root=join(dir,'assets');
+  let q=new SceneReviewQueue({databasePath:db,artifactRoot:root});
+  const r=request(),hash=sha(JSON.stringify(r));
+  q.db.prepare("INSERT INTO scene_jobs (mission_id,request_sha,state,reason) VALUES (?, ?, ?, ?)")
+   .run(r.missionId+'-'+r.shotId,hash,'PENDING_VALIDATION','WORKER_INTERRUPTED');
+  q.close();
+  q=new SceneReviewQueue({databasePath:db,artifactRoot:root});
+  const state=q.status(r.missionId+'-'+r.shotId);
+  assert.equal(state.state,'BLOCKED_RUNTIME_LIMIT');
+  assert.equal(state.reason,'INTERRUPTED_JOB_REQUIRES_NEW_MISSION');
+  q.close();
+ }finally{rmSync(dir,{recursive:true,force:true})}
+});
