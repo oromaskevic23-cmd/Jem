@@ -1,7 +1,7 @@
 /* Jem🌼 offline static-shell cache. NEVER caches user photos, JSON plans, video or API requests. */
 const CACHE='jem-shell-v2-20261025';
 const STATIC=['./','./index.html','./app.mjs','./portable-storyboard.mjs',
- './manifest.webmanifest','./icon.svg'];
+ './manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(STATIC)).then(()=>self.skipWaiting()));
 });
