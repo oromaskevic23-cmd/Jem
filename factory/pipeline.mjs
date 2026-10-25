@@ -5,6 +5,7 @@ import {createHash} from 'node:crypto';
 import {readFileSync,writeFileSync,mkdirSync,mkdtempSync,statSync} from 'node:fs';
 import {resolve,join} from 'node:path';
 import {writeScreenplay,compileRigFilm} from './screenplay.mjs';
+import {useLocalScreenplayModel} from './local-ollama.mjs';
 import {renderOriginals} from '../originals/render.mjs';
 import {validateImageBytes} from '../src/storyboard.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
@@ -48,7 +49,19 @@ export function developProductionProject({outputRoot,idea,theme='auto',language=
  return {directory,screenplay};
 }
 export async function runFilmFactory(config={}){
- const planning=developProductionProject(config);
+ let planning=developProductionProject(config);
+ if(config.ollamaModel){
+  const screenplay=await useLocalScreenplayModel(planning.screenplay,
+   {model:config.ollamaModel,fetchImpl:config.ollamaFetch??fetch});
+  encode(join(planning.directory,'screenplay.json'),screenplay);
+  encode(join(planning.directory,'shot-plan.json'),{
+   schema:'jem_shot_plan_v1',screenplaySha256:screenplay.screenplaySha256,
+   shots:screenplay.shots.map(x=>({id:x.shotId,start:x.fromSec,end:x.toSec,
+    prompt:x.shotPrompt,action:x.action,caption:x.caption,
+    dialogue:x.dialogue,referenceIds:x.referenceIds,continuity:x.continuity}))
+  });
+  planning={...planning,screenplay};
+ }
  const {directory,screenplay}=planning;
  if(screenplay.referenceAssets.length){
   const blocked={schema:'jem_factory_result_v1',screenplaySha256:screenplay.screenplaySha256,
@@ -81,7 +94,7 @@ export async function runFilmFactory(config={}){
    animation:'PROCEDURAL_PRESET_RIG',voices:'NOT_GENERATED',
    soundtrack:'ORIGINAL_INSTRUMENTAL',film:'MP4_VERIFIED',distribution:'DENIED'},
   runtimeVoice:'NONE',generativeAI:'NOT_CONNECTED',
-  screenplaySource:'DETERMINISTIC_NOT_LLM',
+  screenplaySource:screenplay.generator,
   finalQuality:'OWNER_REVIEW_REQUIRED',ownerApproval:'REQUIRED'};
  encode(join(directory,'production-report.json'),result);
  return {...planning,result,film:rendered.film,rendered};
