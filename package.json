@@ -22,6 +22,11 @@
     "factory:test": "node --test test/factory.test.mjs test/local-ollama.test.mjs",
     "factory:qa": "node --test test/factory.integration.test.mjs",
     "factory:verify": "npm run factory:test && npm run factory:qa",
-    "factory:film": "node factory/cli.mjs --idea \"Friends save the garden after the storm\" --theme garden --output ./originals-output --seconds 60"
+    "factory:film": "node factory/cli.mjs --idea \"Friends save the garden after the storm\" --theme garden --output ./originals-output --seconds 60",
+    "video:check": "node --experimental-sqlite --test test/scene-gateway.test.mjs",
+    "video:qa": "node --experimental-sqlite --test test/scene-gateway.integration.test.mjs",
+    "voice:check": "node --test test/voice.test.mjs",
+    "voice:qa": "node --test test/voice.integration.test.mjs",
+    "voice:film": "node factory/cli.mjs --idea \"Pip and Starflower restore the cloud lighthouse and help everyone safely return home\" --theme lighthouse --seconds 60 --output ./originals-output --voice yes"
   }
 }
