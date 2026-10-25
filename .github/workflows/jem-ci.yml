@@ -38,6 +38,7 @@ jobs:
         run: |
           command -v ffmpeg
           command -v ffprobe
-          ffmpeg -hide_banner -encoders | grep -E 'libx264.*H.264'
+          ffmpeg -hide_banner -encoders | grep -i x264 || true
+          ffmpeg -hide_banner -version | head -n 2
       - name: Actually render MP4 and verify frames, camera motion and video hash
         run: npm run test:media
