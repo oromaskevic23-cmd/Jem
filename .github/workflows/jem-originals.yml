@@ -1,0 +1,55 @@
+name: Jem Originals — independently verified cartoon
+on:
+  push:
+    branches: [feat/jem-originals-studio-pilot-20261025]
+    paths:
+      - 'originals/**'
+      - 'test/originals*.mjs'
+      - 'package.json'
+      - '.github/workflows/jem-originals.yml'
+  pull_request:
+    paths:
+      - 'originals/**'
+      - 'test/originals*.mjs'
+      - 'package.json'
+      - '.github/workflows/jem-originals.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  narrative-character-unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # pinned v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # pinned v4
+        with:
+          node-version: '22'
+      - name: Verify original screenplay, frame renderer and soundtrack code
+        run: |
+          node --check originals/pilot.mjs
+          node --check originals/score.mjs
+          node --check originals/draw.mjs
+          node --check originals/render.mjs
+          node --check originals/cli.mjs
+          node --test test/originals.test.mjs
+  real-cartoon-mp4-independent-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # pinned v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # pinned v4
+        with:
+          node-version: '22'
+      - name: Install free FFmpeg toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg
+          command -v ffmpeg
+          command -v ffprobe
+      - name: Generate and independently verify two real original cartoons
+        run: node --test test/originals.integration.test.mjs

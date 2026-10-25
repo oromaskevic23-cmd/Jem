@@ -14,6 +14,10 @@
     "verify": "npm run check && npm test && npm run test:media",
     "start": "node src/server.mjs",
     "render": "node src/cli.mjs",
-    "preview:pwa": "node src/pwa-server.mjs"
+    "preview:pwa": "node src/pwa-server.mjs",
+    "originals:film": "node originals/cli.mjs --output ./originals-output --seconds 60",
+    "originals:test": "node --test test/originals.test.mjs",
+    "originals:qa": "node --test test/originals.integration.test.mjs",
+    "originals:verify": "npm run originals:test && npm run originals:qa"
   }
 }
