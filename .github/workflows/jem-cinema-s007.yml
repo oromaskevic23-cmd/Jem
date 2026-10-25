@@ -7,6 +7,8 @@ on:
       - 'test/character-lock.test.mjs'
       - 'test/cinema-session.test.mjs'
       - 'test/ltx-offline-worker.test.mjs'
+      - 'test/film-benchmark.test.mjs'
+      - 'benchmarks/film-benchmark-v1.json'
       - 'package.json'
       - '.github/workflows/jem-cinema-s007.yml'
   pull_request:
@@ -36,6 +38,7 @@ jobs:
           node --check video/character-lock.mjs
           node --check video/ltx-offline-worker.mjs
           node --check video/cinema-session.mjs
+          node --check video/cinema-cli.mjs
       - name: CharacterLock, real signature checks, image pinning and actual preflight validation
         run: npm run cinema:check
   independent-security-regression:
@@ -52,4 +55,5 @@ jobs:
         run: |
           npm run video:check
           npm run factory:test
+          node --test test/film-benchmark.test.mjs
           node --test test/competitor-evidence.test.mjs
