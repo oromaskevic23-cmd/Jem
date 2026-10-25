@@ -108,6 +108,21 @@ The pilot uses no AI generative video model, pre-trained image-to-video weights,
 
 See [Originals Film Studio Production Standard](docs/JEM_ORIGINALS_STUDIO.md). This is a **stacked Draft PR** based on Jem Enterprise PR #1. Public distribution and monetization require separate owner approval.
 
+
+## Jem🌼 FilmFactory — Idea → Screenplay → Shots → Video (Sprint 003)
+
+A new no-cost **local one-command production pipeline** turns a story idea into a six-act screenplay, shot-by-shot plan, dialogues (text-only), character Bible, soundtrack direction and production manifest. Existing Pip/Starflower rigs can render a real **H.264/AAC MP4** from a generated English script, with full video verification and subtitle files.
+
+Example:
+
+    node factory/cli.mjs --idea "Friends rescue the enchanted garden after the storm" --theme garden --seconds 60 --output ./originals-output
+
+An already-installed local Ollama model can optionally suggest a screenplay with the --ollama-model flag; no live model inference has been independently confirmed yet.
+
+**Reference photos are protected:** with uploaded photos, FilmFactory builds a production package, but does not substitute unrelated 2D characters and falsely claim that the provided people and animals were animated. Real image-to-video and speech generation remain unconnected.
+
+See [FilmFactory instructions](docs/JEM_FILMFACTORY_PRODUCTION.md) and the [seven IMPERIAL Kids series concepts](docs/IMPERIAL_KIDS_FILMFACTORY_SLATE.md).
+
 ## Security / privacy
 
 - Localhost-only web server, strict upload/size limits, exact JSON schema and restricted file types; no model network use, paid API, telemetry or advertising.
