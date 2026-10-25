@@ -1,0 +1,55 @@
+name: Jem Sprint 007 — CharacterLock & Local I2V Admission
+on:
+  push:
+    branches: [feat/jem-cinema-characterlock-i2v-s007-20261026]
+    paths:
+      - 'video/**'
+      - 'test/character-lock.test.mjs'
+      - 'test/cinema-session.test.mjs'
+      - 'test/ltx-offline-worker.test.mjs'
+      - 'package.json'
+      - '.github/workflows/jem-cinema-s007.yml'
+  pull_request:
+    paths:
+      - 'video/**'
+      - 'test/character-lock.test.mjs'
+      - 'test/cinema-session.test.mjs'
+      - 'test/ltx-offline-worker.test.mjs'
+      - 'package.json'
+      - '.github/workflows/jem-cinema-s007.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  independently-reviewed-character-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # pinned v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # pinned v4
+        with:
+          node-version: '22'
+      - name: Verify actual Javascript syntax
+        run: |
+          node --check video/character-lock.mjs
+          node --check video/ltx-offline-worker.mjs
+          node --check video/cinema-session.mjs
+      - name: CharacterLock, real signature checks, image pinning and actual preflight validation
+        run: npm run cinema:check
+  independent-security-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # pinned v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # pinned v4
+        with:
+          node-version: '22'
+      - name: Existing scene gate, FilmFactory and model contract regression
+        run: |
+          npm run video:check
+          npm run factory:test
+          node --test test/competitor-evidence.test.mjs
