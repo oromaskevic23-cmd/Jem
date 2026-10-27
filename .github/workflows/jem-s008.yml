@@ -7,6 +7,7 @@ on:
       - 'test/shot-continuity.test.mjs'
       - 'test/cinema-sequence.test.mjs'
       - 'test/film-director.test.mjs'
+      - 'test/film-evidence.test.mjs'
       - '.github/workflows/jem-s008.yml'
   pull_request:
     paths:
@@ -31,6 +32,7 @@ jobs:
         run: |
           node --check video/shot-continuity.mjs
           node --check video/film-director.mjs
+          node --check video/film-evidence.mjs
           node --check video/cinema-session.mjs
       - name: Continuity and sequence regression
-        run: node --experimental-sqlite --test test/shot-continuity.test.mjs test/film-director.test.mjs test/cinema-sequence.test.mjs test/cinema-session.test.mjs
+        run: node --experimental-sqlite --test test/shot-continuity.test.mjs test/film-director.test.mjs test/film-evidence.test.mjs test/cinema-sequence.test.mjs test/cinema-session.test.mjs
