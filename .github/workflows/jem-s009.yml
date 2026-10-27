@@ -1,0 +1,24 @@
+name: Jem Sprint 009 — I2V readiness gate
+on:
+  push:
+    branches: [feat/jem-s009-inference-readiness-20261027]
+  pull_request:
+    paths:
+      - 'video/i2v-readiness.mjs'
+      - 'test/i2v-readiness.test.mjs'
+      - '.github/workflows/jem-s009.yml'
+permissions:
+  contents: read
+jobs:
+  fail-closed-readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # pinned v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # pinned v4
+        with:
+          node-version: '22'
+      - run: node --check video/i2v-readiness.mjs
+      - run: node --test test/i2v-readiness.test.mjs
