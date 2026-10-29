@@ -18,12 +18,15 @@ export function validateImageBytes(bytes){
  if(!png&&!jpg)throw Error('REFERENCE_IMAGE_FORMAT_DENIED');
  return {format:png?'png':'jpeg',sha256:sha256(bytes),bytes:bytes.length};
 }
-export function inspectImage(path){
+/** Read once so callers can pin the exact bytes used to compute the hash. */
+export function loadReferenceImage(path){
  if(typeof path!=='string'||!path)throw Error('IMAGE_PATH_REQUIRED');
  const st=statSync(path);
  if(!st.isFile()||st.size>12*1024*1024||st.size<32)throw Error('REFERENCE_IMAGE_SIZE_DENIED');
- return validateImageBytes(readFileSync(path));
+ const data=readFileSync(path);
+ return {reference:validateImageBytes(data),data};
 }
+export function inspectImage(path){return loadReferenceImage(path).reference;}
 export function makeStoryboard({prompt,reference,durationSec=60,fps=12,width=640,height=360}={}){
  if(!clean(prompt))throw Error('PROMPT_INVALID');
  if(!reference||!['png','jpeg'].includes(reference.format)||!/^[a-f0-9]{64}$/.test(reference.sha256))

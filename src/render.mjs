@@ -4,10 +4,10 @@
  * Executable input is never built from prompt or other user text.
  */
 import {spawn} from 'node:child_process';
-import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,statSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync} from 'node:fs';
 import {resolve,join} from 'node:path';
 import {createHash} from 'node:crypto';
-import {inspectImage,makeStoryboard} from './storyboard.mjs';
+import {loadReferenceImage,makeStoryboard} from './storyboard.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 function run(binary,args,{timeoutMs=180000}={}){
  return new Promise((resolveResult,reject)=>{
@@ -74,17 +74,22 @@ function motionFilter(scene,storyboard){
 export async function renderFilm({prompt,photoPath,outputRoot,durationSec=60,
  fps=12,width=640,height=360}={}){
  if(typeof outputRoot!=='string'||!outputRoot.trim())throw Error('OUTPUT_ROOT_REQUIRED');
- const image=inspectImage(photoPath);
+ const {reference:image,data}=loadReferenceImage(photoPath);
  const story=makeStoryboard({prompt,reference:image,durationSec,fps,width,height});
- await probeImage(photoPath);
  const root=resolve(outputRoot);
  mkdirSync(root,{recursive:true,mode:0o700});
  const project=mkdtempSync(join(root,'jem-lab-'));
+ const snapshot=join(project,'reference-snapshot.'+(image.format==='png'?'png':'jpg'));
+ try{
+ // Every shot and the receipt refer to the same private snapshot, even if the
+ // caller changes the original file while FFmpeg is running.
+ writeFileSync(snapshot,data,{mode:0o600,flag:'wx'});
+ await probeImage(snapshot);
  const clips=[];
  for(const scene of story.scenes){
   const file='shot_'+scene.id+'.mp4';
   const args=['-hide_banner','-loglevel','error','-nostdin','-y',
-   '-loop','1','-framerate',String(fps),'-i',resolve(photoPath),
+   '-loop','1','-framerate',String(fps),'-i',snapshot,
    '-vf',motionFilter(scene,story),'-frames:v',String(scene.frames),
    '-an','-c:v','libx264','-preset','ultrafast','-crf','27',
    '-pix_fmt','yuv420p','-r',String(fps),join(project,file)];
@@ -113,4 +118,7 @@ export async function renderFilm({prompt,photoPath,outputRoot,durationSec=60,
  writeFileSync(join(project,'storyboard.json'),JSON.stringify(story,null,2)+'\n');
  writeFileSync(join(project,'render-report.json'),JSON.stringify(report,null,2)+'\n');
  return {directory:project,video:mp4,storyboard:story,report};
+ }finally{
+  rmSync(snapshot,{force:true});
+ }
 }

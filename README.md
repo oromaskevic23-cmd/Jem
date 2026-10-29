@@ -38,6 +38,8 @@ An isolated local project folder contains:
 
 **The photo is not edited or replaced.** Camera zoom/crop can change its framing; its original bytes are the same source for each shot.
 
+For each local render, Jem reads the reference once and creates a private temporary snapshot. All shots and the receipt use that same byte sequence even if the original path is changed during rendering. The snapshot is removed when rendering completes or fails. This pins the input bytes; it is not a visual-identity guarantee or a sandbox against another process with access to the working directory.
+
 ## Reproducible verification
 
 ```bash
