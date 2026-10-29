@@ -10,7 +10,7 @@
   "scripts": {
     "check": "node --check src/storyboard.mjs && node --check src/render.mjs && node --check src/cli.mjs && node --check src/server.mjs && node --check src/pwa-server.mjs && node --check pwa/portable-storyboard.mjs && node --check pwa/app.mjs && node --check pwa/sw.js",
     "test": "node --test test/storyboard.test.mjs test/server.test.mjs test/pwa.test.mjs",
-    "test:media": "node --test test/render.integration.test.mjs",
+    "test:media": "node --test test/render.integration.test.mjs test/reference-integrity.integration.test.mjs",
     "verify": "npm run check && npm test && npm run test:media",
     "start": "node src/server.mjs",
     "render": "node src/cli.mjs",
