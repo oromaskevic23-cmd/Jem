@@ -40,3 +40,7 @@ No third-party code is relicensed. User input photographs and voices remain outs
 ### 4. State
 
 Verified historical branch CI with real FFmpeg media tests; main branch has a new dedicated Enterprise CI gate. Consult the latest run before claiming it passed. The signed reviewer test uses ephemeral local keys. Production, cloud platform, App Store publishing and commercial launch are not implemented.
+
+### 5. Executable offline media attestation
+
+The additional `enterprise/attest-film.mjs` reads an actual existing MP4, its renderer report, its pinned storyboard and a local rights record. It checks immutable source digests, verifies real video frames/codec/timing using FFprobe, computes a local Film Proof, and explicitly retains `sourceRightsLegallyVerified=false`, `independentVisualQAVerified=false`, and `publishAuthorized=false`. `enterprise/cli.mjs` writes a new read-only operator evidence file with exclusive `wx` create; it never uploads film bytes or contacts an AI provider. GitHub CI executes an actual FFmpeg integration test with deliberate evidence tampering and symlink refusal.

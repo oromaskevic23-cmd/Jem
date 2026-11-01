@@ -40,6 +40,28 @@ npm start
 
 Desktop studio (local only): `http://127.0.0.1:8765`. PWA preview: `npm run preview:pwa` on `http://127.0.0.1:8766`. Access outside the operator's local machine is not supported.
 
+## Enterprise Film Proof from actual MP4
+
+Once a local camera-motion film has been rendered, Jem can independently re-read its
+MP4, verify the exact storyboard hash, check film bytes with SHA-256 and decode the
+actual H.264 frame count, duration and resolution using FFprobe. An operator-supplied
+rights-evidence file is hashed, **not treated as legal proof of ownership**.
+
+~~~shell
+npm run enterprise:verify
+
+# For an already rendered local film directory:
+npm run enterprise:attest -- \
+  --render-directory /path/to/jem-lab-output \
+  --rights-file /path/to/local-rights-record.txt \
+  --project-id jem-original-001 \
+  --tenant-id imperial-internal \
+  --output /path/to/private-film-evidence.json
+~~~
+
+The result is a local, inspectable hash-bound Film Proof. It is not a signed
+Owner production permit, independent character-identity QA, legal rights clearance,
+AI video generation or permission to publish.
 ## Architecture
 
 Architect → HANTER (AI Command Center) → **federated orchestrators**, including ASTRA → separately scoped Nano Core Agents. VELION is a model fabric (MAX is only a mode); ORION offers advisory intelligence. Jem FilmFactory independently enforces CharacterLock, Enterprise Skills, AI Passport, Guardian Core, Approval Gateway, ProofGraph, Audit Ledger, Zero Trust, Owner Kill Switch, Public/Private Boundary, and the CRYPTO IMPERIAL Ecosystem Boundary.

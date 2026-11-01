@@ -10,6 +10,7 @@
 - [x] Original project attribution and custom top-level proprietary source license retained.
 - [x] Local FFmpeg camera-motion renderer, procedural original 2D FilmFactory, PWA planning code, CharacterLock and voice lab included in main.
 - [x] Separate content hash proofs and signed reviewer **verification code** published with adversarial tests.
+- [x] Local offline media attestation checks actual MP4/FFprobe, storyboard source and rights-file digest; signature and actual legal rights remain separate.
 - [ ] Confirm all new `main` GitHub Actions jobs are green after final edits. This checkbox requires the completed run result, not a promise.
 
 ## Critical production blockers — DO NOT BYPASS

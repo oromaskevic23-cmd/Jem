@@ -37,6 +37,8 @@ jobs:
           command -v ffmpeg
           command -v ffprobe
       - run: npm run verify
+      - name: Independently attest a real local MP4 and reject tampering
+        run: npm run enterprise:verify
   originals-film-factory-qa:
     name: Actual Original 2D and FilmFactory rendered MP4 verification
     runs-on: ubuntu-latest
