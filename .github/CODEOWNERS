@@ -5,3 +5,14 @@
 /.github/workflows/enterprise-founder-authorship.yml @oromaskevic23-cmd
 /LICENSE* @oromaskevic23-cmd
 /NOTICE* @oromaskevic23-cmd
+
+# Jem Enterprise FilmFactory code and production release boundaries
+/src/ @oromaskevic23-cmd
+/video/ @oromaskevic23-cmd
+/factory/ @oromaskevic23-cmd
+/originals/ @oromaskevic23-cmd
+/voice/ @oromaskevic23-cmd
+/pwa/ @oromaskevic23-cmd
+/enterprise/ @oromaskevic23-cmd
+/docs/JEM_ENTERPRISE_RELEASE_GATES.md @oromaskevic23-cmd
+/.github/workflows/jem-enterprise-ci.yml @oromaskevic23-cmd

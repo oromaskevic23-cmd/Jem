@@ -16,6 +16,11 @@ test('localhost studio serves its real UI and blocks remote-host authority',asyn
   assert.equal(status.busy,false);assert.equal(status.production,'NOT_DEPLOYED');
   r=await fetch(base+'/api/film');assert.equal(r.status,404);
   r=await fetch(base+'/api/render',{method:'POST',
+   headers:{'Origin':'http://untrusted.example','Content-Type':'application/json'},
+   body:JSON.stringify({prompt:'attack'})});
+  assert.equal(r.status,403);
+  assert.equal((await r.json()).error,'CROSS_ORIGIN_DENIED');
+  r=await fetch(base+'/api/render',{method:'POST',
    headers:{'Content-Type':'text/plain'},body:'hello'});
   assert.equal(r.status,415);
   r=await fetch(base+'/api/render',{method:'POST',

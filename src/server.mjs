@@ -33,6 +33,11 @@ export function makeApp(){
   const host=req.headers.host||'';
   if(!/^127\.0\.0\.1(:[0-9]+)?$/.test(host)&&!/^localhost(:[0-9]+)?$/.test(host))
    return reply(res,403,{error:'LOCAL_HOST_ONLY'});
+  // Explicitly reject foreign browser Origins even on loopback.
+  // Non-browser local operator clients may omit Origin; JSON-only POST still applies.
+  const origin=req.headers.origin;
+  if(origin!==undefined&&origin!=='http://'+host)
+   return reply(res,403,{error:'CROSS_ORIGIN_DENIED'});
   const pathname=new URL(req.url,BASE).pathname;
   if(req.method==='GET'&&pathname==='/'){
    res.writeHead(200,{'Content-Type':'text/html; charset=utf-8',

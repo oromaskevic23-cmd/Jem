@@ -10,13 +10,13 @@ The founder supplied visual concept posters for seven story worlds and a unifyin
 
 | Show / key | Visual concept from founder | Pilot narrative | Educational value |
 | --- | --- | --- | --- |
-| **Мастерская на колёсах** · workshop | Friendly children, repair truck, raccoon/corgi/ducks, coastal town and parrot | A bridge breaks before a town celebration; a young team organizes tools, repairs infrastructure and welcomes everyone home | Cooperation, repair, shared responsibility |
-| **Горные спасатели** · mountain | Young climbers, rescue dog, goat, red panda and eagle amid mountain waterfalls | Friends follow an emergency signal through an alpine storm and choose the safest way to rescue an animal | Preparation, courage, mountain safety |
-| **Садовые следопыты** · garden | Children, parrots, koala, capybara, rabbits and gardens | The garden loses its water; young trackers trace the stream and restore nature | Conservation, observation, kindness |
-| **Лесные спасатели** · forest | Explorer child, friendly robot, woodland animals and deer | A deer loses its trail; the forest team works together to protect its home | Wildlife respect, empathy, resilience |
-| **Океан добрых друзей** · ocean | Explorer child, robot, turtle, dolphin and reef animals | A sea turtle needs safe passage through the reef; every creature brings a clue | Ocean ecology, curiosity, teamwork |
-| **Команда Облачного Маяка** · lighthouse | Red-haired adventurer, raccoon engineer, winged fox, cloud companion, floating islands | A sky-lighthouse goes dark; the team restores a beacon to guide travelers home | Navigation, ingenuity, friendship |
-| **Тайна поющих садов** · music | Children, an alpaca-like companion, hedgehog, luminous flowers and musical notes | The melody disappears from the garden; the friends find the lost notes and bring music back | Creativity, music, listening |
+| **Workshop on Wheels** · workshop | Friendly children, repair truck, raccoon/corgi/ducks, coastal town and parrot | A bridge breaks before a town celebration; a young team organizes tools, repairs infrastructure and welcomes everyone home | Cooperation, repair, shared responsibility |
+| **Mountain Rescuers** · mountain | Young climbers, rescue dog, goat, red panda and eagle amid mountain waterfalls | Friends follow an emergency signal through an alpine storm and choose the safest way to rescue an animal | Preparation, courage, mountain safety |
+| **Garden Trackers** · garden | Children, parrots, koala, capybara, rabbits and gardens | The garden loses its water; young trackers trace the stream and restore nature | Conservation, observation, kindness |
+| **Forest Rescuers** · forest | Explorer child, friendly robot, woodland animals and deer | A deer loses its trail; the forest team works together to protect its home | Wildlife respect, empathy, resilience |
+| **Ocean of Kind Friends** · ocean | Explorer child, robot, turtle, dolphin and reef animals | A sea turtle needs safe passage through the reef; every creature brings a clue | Ocean ecology, curiosity, teamwork |
+| **Cloud Lighthouse Crew** · lighthouse | Red-haired adventurer, raccoon engineer, winged fox, cloud companion, floating islands | A sky-lighthouse goes dark; the team restores a beacon to guide travelers home | Navigation, ingenuity, friendship |
+| **Mystery of the Singing Gardens** · music | Children, an alpaca-like companion, hedgehog, luminous flowers and musical notes | The melody disappears from the garden; the friends find the lost notes and bring music back | Creativity, music, listening |
 
 **Main flagship:** *IMPERIAL Kids — Small Hearts • Big Changes*. Use a visually consistent globe, kindness and inclusion theme across titles. Specific portrait likenesses should be used only with proper permission and verified identity continuity.
 
@@ -42,7 +42,7 @@ The fully envisioned end-state is:
 - **Character reference integrity:** signed-off image source digests recorded in local project. No photo uploaded to the studio repo or to a cloud model.
 - **Real end-to-end video:** only for **existing original Pip + Starflower procedural 2D rigs**, with story-specific 6-scene captions, audio score and verified H.264/AAC MP4. Generic motion poses remain reused between stories.
 - **Picture-specific 3D animation:** **NOT CONNECTED**. If reference photos are supplied, the pipeline produces screenplay + shot plan and returns **BLOCKED_IMAGE_TO_VIDEO_MODEL_NOT_CONNECTED**, with no misleading substituted film.
-- **Spoken dialogue, lip-sync, individual animated likenesses, native 3D character rigs, full feature-length films, mobile MP4 rendering, automatic release/payment:** **NOT IMPLEMENTED**.
+- **Spoken dialogue:** an optional offline eSpeak NG audio lab exists in the separate voice pipeline, with approximate timed mouth movement, not speech-accurate or professional voice acting. Individual likenesses, photorealistic 3D rigs, feature-length films, mobile MP4 rendering and automatic release/payment remain **NOT IMPLEMENTED**.
 
 ### Real AI model requirements
 
@@ -52,11 +52,11 @@ For the user's poster references, **do not generate new appearance or replace fa
 
 ### First franchise technical pilot
 
-**Suggested first project:** *Мастерская на колёсах — The Broken Bridge* (60 seconds). Run the existing **workshop** screenplay preset for the **Pip/Starflower technical animation** only. This does **not** reproduce the children, raccoon, corgi, parrot, repair truck or original 3D poster. The real visual recreation requires the planned generative character and scene modules.
+**Suggested first project:** *Workshop on Wheels — The Broken Bridge* (60 seconds). Run the existing **workshop** screenplay preset for the **Pip/Starflower technical animation** only. This does **not** reproduce the children, raccoon, corgi, parrot, repair truck or original 3D poster. The real visual recreation requires the planned generative character and scene modules.
 
 The pipeline should be judged by independently inspectable outputs: scene script, generated shot list, approved asset references, actual film, real audio, technical QA, owner approval and declared unmet requirements.
 
 **Owner authority:** RomaskevicH  
-**Policy:** $0 development · private assets remain private · Draft PR · no auto-publication.
+**Policy:** $0 development · private assets remain private · source on main does not constitute production release · no auto-publication.
 
 **Jem🌼 Originals — Produce Stories. Verify Everything.**
