@@ -11,7 +11,7 @@
 - [x] Local FFmpeg camera-motion renderer, procedural original 2D FilmFactory, PWA planning code, CharacterLock and voice lab included in main.
 - [x] Separate content hash proofs and signed reviewer **verification code** published with adversarial tests.
 - [x] Local offline media attestation checks actual MP4/FFprobe, storyboard source and rights-file digest; signature and actual legal rights remain separate.
-- [ ] Confirm all new `main` GitHub Actions jobs are green after final edits. This checkbox requires the completed run result, not a promise.
+- [x] Enterprise CI passed 5/5 jobs on source commit `41233fa987e0726fcd5cb046969424302adca41d` in [run 41295400577](https://github.com/oromaskevic23-cmd/Jem/actions/runs/41295400577), including actual film-attestation E2E. Any subsequent code change requires a fresh live CI check.
 
 ## Critical production blockers — DO NOT BYPASS
 

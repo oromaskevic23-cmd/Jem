@@ -23,6 +23,10 @@ The **main** branch incorporates the source of the historically tested offline l
 
 **Current default:** FREE_ONLY, original/authorized inputs, deny external effects, deny auto-publication, deny automatic commercial release. No payments or cryptocurrency operations.
 
+## Local source milestone: v0.3.0
+
+This versioned source milestone has an independently completed GitHub Actions run. [Enterprise evidence checkpoint](docs/JEM_ENTERPRISE_EVIDENCE_20261101.md) records the actual results, limitations, and release blockers. **v0.3.0 is not a commercial or production-ready product release.**
+
 ## Local quick start
 
 Requires Node.js 22+; **FFmpeg/FFprobe** with `libx264` for desktop MP4 and **eSpeak NG** for optional voice. These are external, separately licensed tools.

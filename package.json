@@ -1,9 +1,9 @@
 {
   "name": "jem-ai-cartoon-animation-studio",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
-  "description": "Jem🌼 cross-platform PWA offline storyboard plus desktop-verified MP4 camera-motion lab; paid flagship price proposal, no billing or generative video model",
+  "description": "Jem Enterprise FilmFactory source v0.3: tested local 2D animation, H.264 studio, CharacterLock, signed review and offline media proof; NOT a deployed generative-video service",
   "engines": {
     "node": ">=22"
   },

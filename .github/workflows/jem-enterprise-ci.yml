@@ -2,6 +2,23 @@ name: Jem Enterprise FilmFactory and Verified Media CI
 on:
   push:
     branches: [main]
+    paths:
+      - 'src/**'
+      - 'video/**'
+      - 'voice/**'
+      - 'factory/**'
+      - 'originals/**'
+      - 'pwa/**'
+      - 'enterprise/**'
+      - 'test/**'
+      - 'tools/**'
+      - 'package.json'
+      - 'README.md'
+      - 'SECURITY.md'
+      - 'LICENSE'
+      - 'docs/JEM_ENTERPRISE_ARCHITECTURE.md'
+      - 'docs/JEM_ENTERPRISE_RELEASE_GATES.md'
+      - '.github/workflows/jem-enterprise-ci.yml'
   pull_request:
   workflow_dispatch:
 permissions:
