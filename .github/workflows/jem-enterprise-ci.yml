@@ -1,0 +1,94 @@
+name: Jem Enterprise FilmFactory and Verified Media CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  security-contracts:
+    name: Node22 static and adversarial security contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # pinned v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # pinned v4
+        with:
+          node-version: '22'
+      - run: node tools/enterprise-ci.mjs
+  camera-reference-qa:
+    name: Actual FFmpeg H264 renders and immutable input references
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # pinned v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # pinned v4
+        with:
+          node-version: '22'
+      - name: Install free local FFmpeg media tooling
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg
+          command -v ffmpeg
+          command -v ffprobe
+      - run: npm run verify
+  originals-film-factory-qa:
+    name: Actual Original 2D and FilmFactory rendered MP4 verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # pinned v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # pinned v4
+        with:
+          node-version: '22'
+      - name: Install FFmpeg locally
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg
+      - run: npm run originals:verify
+      - run: npm run factory:verify
+      - run: npm run video:qa
+  spoken-film-qa:
+    name: Real offline eSpeakNG and FFmpeg voice QA
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # pinned v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # pinned v4
+        with:
+          node-version: '22'
+      - name: Install free FFmpeg and eSpeakNG
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg espeak-ng
+      - run: npm run voice:qa
+  rights-and-releases:
+    name: Founder, license and credential boundary
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # pinned v4.2.2
+        with:
+          persist-credentials: false
+      - shell: bash
+        run: |
+          set -euo pipefail
+          test -s LICENSE
+          test -s AUTHORS.md
+          test -s docs/JEM_ENTERPRISE_RELEASE_GATES.md
+          grep -Fq 'Alexander Nikolaevich Romaskevich' AUTHORS.md
+          grep -Fq 'PROPRIETARY LICENSE' LICENSE
+          if git ls-files | grep -Ei '(^|/)(\.env|id_rsa|.*private.*\.pem|.*secret.*\.key|wallet-key)$'; then
+            echo "PRIVATE_KEY_COMMITTED" >&2
+            exit 1
+          fi
+          echo "JEM_SOURCE_RIGHTS_PASS_NOT_PRODUCTION"
