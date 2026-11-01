@@ -1,0 +1,379 @@
+{
+  "schema": "jem_competitive_intelligence_v1",
+  "checkedAt": "2026-10-26",
+  "analysisPeriod": "2026-10-26",
+  "evidencePolicy": "Vendor claims are advertised, not independently benchmarked. All unknowns explicitly NOT_ASSESSED. Independent model rankings are quality proxies, not end-to-end feature-film proof.",
+  "sourcesPrimary": [
+    "https://arena.ai/leaderboard/video/image-to-video",
+    "https://arena.ai/leaderboard/video/text-to-video",
+    "https://artificialanalysis.ai/video/leaderboard/image-to-video/"
+  ],
+  "referenceBenchmarks": {
+    "imageToVideo": "Arena AI September 21 2026: MiniMax H3, Gemini Omni 1.1 Flash, Wan3, Dreamina Seedance 2.5 among leaders; ranks volatile",
+    "textToVideo": "Artificial Analysis 2026 current: Wan3.0 at top of audio T2V; differs from Arena rankings",
+    "notComparable": "Leaderboards evaluate clips, not full animated-film completion or consistency across multiple scenes"
+  },
+  "pricingWarning": "Proposed Jem Signature $999/month is not more expensive than all competitors: invideo FAQ documents $1000/month Elite, many enterprise prices unknown. Higher price alone is not evidence of superiority.",
+  "jemVerifiedAtPR4": {
+    "featureBranch": "feat/jem-video-voice-gateway-sprints-004-005-20261026",
+    "lastVerifiedCommit": "5c849dd899c85db7c7053d21515e99f18bfd1fee",
+    "status": "OPEN_DRAFT_NOT_RELEASED",
+    "capabilities": [
+      "deterministic six-act scripts",
+      "offline 2D moving-rig MP4",
+      "six eSpeak voice lines and time-window mouth animation",
+      "PWA offline storyboard",
+      "synthetic scene acceptance QA"
+    ],
+    "notCapabilities": [
+      "real image-to-video model connected",
+      "frame/actor faithful recreation of user photo",
+      "phoneme lip sync",
+      "native signed iOS Android binaries",
+      "published paid service",
+      "verified quality superiority"
+    ]
+  },
+  "competitors": [
+    {
+      "id": "runway-gen45",
+      "company": "Runway",
+      "product": "Gen-4.5 + Workflows + Act-Two",
+      "category": "generative_clips_and_editing",
+      "singleClipSecondsMax": 10,
+      "photoToMotion": "YES_ADVERTISED",
+      "characterRef": "TOOLS_AVAILABLE_VARIABLE_BY_WORKFLOW",
+      "nativeSpeech": "SEPARATE_WORKFLOW",
+      "multiShot": "WORKFLOWS",
+      "endToEndFilm": "NOT_INDEPENDENTLY_TESTED",
+      "mobileApp": "NOT_ASSESSED",
+      "priceUsdPerMonthExample": 95,
+      "priceNote": "Max $95 monthly; $76/mo equivalent billed yearly; enterprise separately quoted",
+      "license": "PLATFORM_TERMS_VERIFY",
+      "source": [
+        "https://help.runwayml.com/hc/en-us/articles/46974685288467-Creating-with-Gen-4-5",
+        "https://runway.com/pricing"
+      ],
+      "risk": "Model quality and production-ready editing, strong credit and workflow ecosystem"
+    },
+    {
+      "id": "kling-40",
+      "company": "Kuaishou",
+      "product": "Kling 4.0 / Flash limited rollout",
+      "category": "generative_clips_and_multishot",
+      "singleClipSecondsMax": 30,
+      "photoToMotion": "YES_ADVERTISED",
+      "characterRef": "UP_TO_15_REFERENCE_ASSETS_ADVERTISED",
+      "nativeSpeech": "YES_ADVERTISED",
+      "multiShot": "YES_ADVERTISED",
+      "endToEndFilm": "NOT_INDEPENDENTLY_TESTED",
+      "mobileApp": "NOT_ASSESSED",
+      "priceUsdPerMonthExample": null,
+      "priceNote": "No universal 4.0 plan price verified; 4.0 Flash early access since Sep 28, rollout not verified for every user",
+      "license": "PLATFORM_TERMS_VERIFY",
+      "source": [
+        "https://kling.ai/blog/kling-4-vs-3"
+      ],
+      "risk": "Strongest single-shot duration threat; deployment may be account-dependent"
+    },
+    {
+      "id": "kling-30",
+      "company": "Kuaishou",
+      "product": "Kling Video 3.0 / Omni",
+      "category": "generative_clips_and_multishot",
+      "singleClipSecondsMax": 15,
+      "photoToMotion": "YES_ADVERTISED",
+      "characterRef": "ELEMENT_AND_MULTI_REFERENCE_ADVERTISED",
+      "nativeSpeech": "YES_ADVERTISED",
+      "multiShot": "YES_ADVERTISED",
+      "endToEndFilm": "NOT_INDEPENDENTLY_TESTED",
+      "mobileApp": "NOT_ASSESSED",
+      "priceUsdPerMonthExample": null,
+      "priceNote": "Credits per second by resolution and audio; no comparable flat monthly charge asserted",
+      "license": "PLATFORM_TERMS_VERIFY",
+      "source": [
+        "https://kling.ai/quickstart/klingai-video-3-model-user-guide"
+      ],
+      "risk": "Character/voice continuity and native lip-sync in one model"
+    },
+    {
+      "id": "google-flow",
+      "company": "Google",
+      "product": "Flow / Veo 3.1 / Gemini Omni Flash",
+      "category": "filmmaker_agent_multimodel",
+      "singleClipSecondsMax": 8,
+      "photoToMotion": "YES_ADVERTISED",
+      "characterRef": "INGREDIENTS_CHARACTER_TOOLS_ADVERTISED",
+      "nativeSpeech": "SUPPORTED_FOR_SOME_MODELS",
+      "multiShot": "SCENEBUILDER",
+      "endToEndFilm": "NOT_INDEPENDENTLY_TESTED",
+      "mobileApp": "SOME_MOBILE_SUPPORT_ADVERTISED",
+      "priceUsdPerMonthExample": 0,
+      "priceNote": "Free plan official Flow page advertises 50 daily credits; API Veo 3.1 preview shutdown 2026-10-22",
+      "license": "PLATFORM_TERMS_VERIFY",
+      "source": [
+        "https://labs.google/fx/tools/flow",
+        "https://ai.google.dev/gemini-api/docs/veo"
+      ],
+      "risk": "Huge image/video model ecosystem and agent tools; APIs and models can retire"
+    },
+    {
+      "id": "minimax-h3",
+      "company": "MiniMax",
+      "product": "MiniMax H3",
+      "category": "generative_video_model",
+      "singleClipSecondsMax": null,
+      "photoToMotion": "RANKED_IMAGE_TO_VIDEO",
+      "characterRef": "NOT_ASSESSED",
+      "nativeSpeech": "RANKED_WITH_AUDIO",
+      "multiShot": "NOT_ASSESSED",
+      "endToEndFilm": "NOT_ASSESSED",
+      "mobileApp": "NOT_ASSESSED",
+      "priceUsdPerMonthExample": null,
+      "priceNote": "Artificial Analysis reports $4.80/min API in I2V leaderboard, plan costs not equivalent",
+      "license": "COMMUNITY_LICENSE_VERIFY",
+      "source": [
+        "https://artificialanalysis.ai/video/leaderboard/image-to-video/",
+        "https://arena.ai/leaderboard/video/image-to-video"
+      ],
+      "risk": "High rated independent I2V quality; must benchmark against current leaders"
+    },
+    {
+      "id": "wan-30",
+      "company": "Alibaba",
+      "product": "Wan 3.0",
+      "category": "generative_video_model",
+      "singleClipSecondsMax": null,
+      "photoToMotion": "RANKED_IMAGE_TO_VIDEO",
+      "characterRef": "NOT_ASSESSED",
+      "nativeSpeech": "RANKED_WITH_AUDIO",
+      "multiShot": "NOT_ASSESSED",
+      "endToEndFilm": "NOT_ASSESSED",
+      "mobileApp": "NOT_ASSESSED",
+      "priceUsdPerMonthExample": null,
+      "priceNote": "Artificial Analysis T2V quality top ranking on 2026-10-26 snapshot, not proof of feature-film superiority",
+      "license": "MODEL_VARIANT_LICENSE_VERIFY",
+      "source": [
+        "https://artificialanalysis.ai/embed/text-to-video-leaderboard/leaderboard/text-to-video",
+        "https://arena.ai/leaderboard/video/image-to-video"
+      ],
+      "risk": "Strong generative visual performance in independent blind preference"
+    },
+    {
+      "id": "seedance-25",
+      "company": "ByteDance",
+      "product": "Dreamina Seedance 2.5",
+      "category": "generative_video_model",
+      "singleClipSecondsMax": null,
+      "photoToMotion": "YES_ADVERTISED",
+      "characterRef": "NOT_ASSESSED",
+      "nativeSpeech": "NOT_ASSESSED",
+      "multiShot": "NOT_ASSESSED",
+      "endToEndFilm": "NOT_ASSESSED",
+      "mobileApp": "NOT_ASSESSED",
+      "priceUsdPerMonthExample": null,
+      "priceNote": "Available through multiple multi-model paid aggregators; per-clip cost model dependent",
+      "license": "PLATFORM_TERMS_VERIFY",
+      "source": [
+        "https://arena.ai/leaderboard/video/image-to-video",
+        "https://pika.art/pricing"
+      ],
+      "risk": "High arena ranking and rapid multi-provider distribution"
+    },
+    {
+      "id": "luma-agents",
+      "company": "Luma",
+      "product": "Luma Agents + Ray3 Modify / Ray3.14",
+      "category": "multimodal_agent_and_editing",
+      "singleClipSecondsMax": 18,
+      "photoToMotion": "YES_ADVERTISED",
+      "characterRef": "RAY3_MODIFY_YES_RAY314_NO",
+      "nativeSpeech": "SEPARATE_GENERATION_TOOLS",
+      "multiShot": "AGENT_COORDINATES_CLIPS",
+      "endToEndFilm": "END_TO_END_CREATIVE_AGENT_CLAIM",
+      "mobileApp": "IOS_AVAILABLE",
+      "priceUsdPerMonthExample": 30,
+      "priceNote": "New Luma app Pro $30, Plus $90, Ultra $300 per official FAQ; distinct from specific ray model costs",
+      "license": "PLATFORM_TERMS_VERIFY",
+      "source": [
+        "https://lumalabs.ai/learning-hub/the-new-luma-app-creative-multimodal-agent",
+        "https://lumalabs.ai/learning-hub/frequently-asked-questions-about-the-new-luma-agents-app",
+        "https://lumalabs.ai/news/ray3_14"
+      ],
+      "risk": "Not just clip generator: multi-model agents coordinate assets and entire creative process"
+    },
+    {
+      "id": "pika",
+      "company": "Pika",
+      "product": "Pika 2.5 + multi-model video/music/speech studio",
+      "category": "generative_video_aggregator",
+      "singleClipSecondsMax": null,
+      "photoToMotion": "YES_ADVERTISED",
+      "characterRef": "CHARACTER_STUDIO",
+      "nativeSpeech": "SPEECH_STUDIO",
+      "multiShot": "NOT_ASSESSED",
+      "endToEndFilm": "NOT_INDEPENDENTLY_TESTED",
+      "mobileApp": "NOT_ASSESSED",
+      "priceUsdPerMonthExample": 95,
+      "priceNote": "Fancy $95–$880 per month; $95 is starting Fancy tier, custom enterprise unspecified",
+      "license": "PLATFORM_TERMS_VERIFY",
+      "source": [
+        "https://pika.art/pricing"
+      ],
+      "risk": "Multi-model marketplace; simply adding models is not differentiation"
+    },
+    {
+      "id": "ltx-studio",
+      "company": "Lightricks",
+      "product": "LTX Studio 2026",
+      "category": "story_to_shots_automation",
+      "singleClipSecondsMax": null,
+      "photoToMotion": "YES_ADVERTISED",
+      "characterRef": "CONSISTENT_ELEMENTS",
+      "nativeSpeech": "AUDIO_TO_VIDEO_ADVERTISED",
+      "multiShot": "STORYBOARDS_AND_FLOWS",
+      "endToEndFilm": "PRODUCTION_WORKFLOW_TOOL_NOT_BENCHMARKED",
+      "mobileApp": "NOT_ASSESSED",
+      "priceUsdPerMonthExample": 12,
+      "priceNote": "Lite $12/mo annual-equivalent, Standard $28, Pro $100 annual-equivalent; free one-time 800 credits",
+      "license": "COMMERCIAL_RIGHTS_DEPEND_ON_PLAN",
+      "source": [
+        "https://website.ltx.studio/studio/pricing"
+      ],
+      "risk": "Direct competitor in AI storyboard, character consistency, node workflows"
+    },
+    {
+      "id": "invideo",
+      "company": "invideo",
+      "product": "invideo AI/Agent Two + editor",
+      "category": "script_to_complete_video",
+      "singleClipSecondsMax": null,
+      "photoToMotion": "AVAILABLE_VIA_MODELS",
+      "characterRef": "MODEL_DEPENDENT",
+      "nativeSpeech": "AVAILABLE_WORKFLOW",
+      "multiShot": "TIMELINE_WITH_AGENT",
+      "endToEndFilm": "YES_WORKFLOW_CLAIM_NOT_TESTED",
+      "mobileApp": "NOT_ASSESSED",
+      "priceUsdPerMonthExample": 1000,
+      "priceNote": "Official 2026-09 FAQ cites Elite $1000/mo for high-volume episodic work; live pricing page has shifting seat offers",
+      "license": "PLATFORM_TERMS_VERIFY",
+      "source": [
+        "https://invideo.io/faq/which-invideo-pricing-plan-is-best-for-ai-video-creators/",
+        "https://invideo.io/pricing/"
+      ],
+      "risk": "Closest prompt-to-entire-video commercial proposition; high-end plan at $1000/mo invalidates universal $999 price-leading claim"
+    },
+    {
+      "id": "adobe-firefly",
+      "company": "Adobe",
+      "product": "Firefly web video editor",
+      "category": "professional_postproduction",
+      "singleClipSecondsMax": null,
+      "photoToMotion": "GENERATE_VIDEO_SUPPORTED",
+      "characterRef": "NOT_ASSESSED",
+      "nativeSpeech": "AUDIO_ENHANCEMENT_AND_EDITING",
+      "multiShot": "MULTITRACK_TIMELINE",
+      "endToEndFilm": "HUMAN_EDITING_WORKFLOW",
+      "mobileApp": "EDITOR_DESKTOP_WEB_REQUIREMENTS",
+      "priceUsdPerMonthExample": null,
+      "priceNote": "Varies across subscription/credit products; no unverified one-to-one price",
+      "license": "PLATFORM_TERMS_VERIFY",
+      "source": [
+        "https://helpx.adobe.com/firefly/web/firefly-video-editor/about-firefly-video-editor/about-firefly-video-editor.html"
+      ],
+      "risk": "Professional editing and existing creative distribution"
+    },
+    {
+      "id": "sora-retired",
+      "company": "OpenAI",
+      "product": "Sora web/app/API (retired)",
+      "category": "historical_not_current",
+      "singleClipSecondsMax": null,
+      "photoToMotion": "HISTORICAL",
+      "characterRef": "HISTORICAL",
+      "nativeSpeech": "HISTORICAL",
+      "multiShot": "HISTORICAL",
+      "endToEndFilm": "HISTORICAL",
+      "mobileApp": "DISCONTINUED",
+      "priceUsdPerMonthExample": null,
+      "priceNote": "Web/app shut down 2026-04-26, API 2026-09-24; NOT a current integrable dependency",
+      "license": "DISCONTINUED",
+      "source": [
+        "https://help.openai.com/en/articles/20001152-what-to-know-about-the-sora-discontinuation"
+      ],
+      "risk": "Vendor discontinuation shows why provider abstraction and export formats matter"
+    }
+  ],
+  "gates": [
+    {
+      "id": "G01",
+      "name": "Genuine referenced character motion",
+      "status": "BLOCKED",
+      "criterion": "At least one real licensed I2V inference, verified motion not merely static panning, on submitted reference image; zero character substitution",
+      "critical": true
+    },
+    {
+      "id": "G02",
+      "name": "Cross-shot character lock",
+      "status": "BLOCKED",
+      "criterion": "12 consecutive independent shots with same approved character IDs, clothes, face geometry and accessories; two independent reviewers with documented assessment",
+      "critical": true
+    },
+    {
+      "id": "G03",
+      "name": "Complete coherent 60-second story",
+      "status": "PROTOTYPE_ONLY",
+      "criterion": "60-second genuinely model-generated story with causal transitions, stable cast, true body motion and end-to-end rendered AV file",
+      "critical": true
+    },
+    {
+      "id": "G04",
+      "name": "Dialogue and lip-sync",
+      "status": "PARTIAL",
+      "criterion": "Human-rated voice quality and word-to-mouth sync assessed on phoneme timing; English, Ukrainian, Russian consented voices",
+      "critical": true
+    },
+    {
+      "id": "G05",
+      "name": "Single prompt to publishable film",
+      "status": "PARTIAL",
+      "criterion": "One request creates story, reference Bible, shot renders, sound, subtitles, edit decision list, QA, owner-approved MP4 release",
+      "critical": true
+    },
+    {
+      "id": "G06",
+      "name": "Mobile native availability",
+      "status": "PWA_LAB",
+      "criterion": "Real iPhone iPad Android tablet Windows macOS tests, project parity, usable UI, secure remote/local render and signed platform artifacts",
+      "critical": false
+    },
+    {
+      "id": "G07",
+      "name": "Production-grade editing and recovery",
+      "status": "BLOCKED",
+      "criterion": "Per-shot regeneration without unrelated changes, timeline editor, job cancel/resume, safe retry, artifact provenance, reproducible export",
+      "critical": true
+    },
+    {
+      "id": "G08",
+      "name": "Privacy, licenses and authorization",
+      "status": "PARTIAL",
+      "criterion": "Isolated model executor, scanned assets, model/source licenses, user consent, proof receipts, owner-signed publish permit, data retention controls",
+      "critical": true
+    },
+    {
+      "id": "G09",
+      "name": "Independent head-to-head quality",
+      "status": "NOT_BENCHMARKED",
+      "criterion": "Same 20 story prompts with same photo rights, equal durations and video settings; blind ratings >=3 raters each; public uncertainty and reproducible results",
+      "critical": true
+    },
+    {
+      "id": "G10",
+      "name": "Profitable premium price",
+      "status": "NOT_FOR_SALE",
+      "criterion": "Paid alpha customers validate price, per-video compute cost and margins; actual checkout security and store rules independently verified before any sale",
+      "critical": true
+    }
+  ]
+}

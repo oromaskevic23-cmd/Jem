@@ -1,0 +1,48 @@
+name: Jem offline animation lab CI
+on:
+  push:
+    branches: [feat/jem-enterprise-studio-v0-1-20261025]
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'test/**'
+      - 'package.json'
+      - '.github/workflows/jem-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  storyboard-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Static checks and storyboard regression tests
+        run: npm run check && npm test
+  independent-real-media-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Install Ubuntu repository FFmpeg (runner does not preinstall it)
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg
+      - name: Verify local FFmpeg and H.264 encoder (free software)
+        run: |
+          command -v ffmpeg
+          command -v ffprobe
+          ffmpeg -hide_banner -encoders | grep -i x264 || true
+          ffmpeg -hide_banner -version | head -n 2
+      - name: Actually render MP4 and verify frames, camera motion and video hash
+        run: npm run test:media

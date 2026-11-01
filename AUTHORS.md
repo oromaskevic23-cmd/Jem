@@ -9,7 +9,7 @@
 This is a **founder/project-level declaration**, not a claim of personal authorship of every line of code, a copyright transfer, a new software license or proof of registered ownership. Git commit authors, contributor acknowledgements, upstream licenses and third-party copyright notices must be preserved. No prior commits or tags may be rewritten to alter attribution.
 
 ## License review
-At the time of this attribution change, no top-level `LICENSE`, `COPYING` or `NOTICE` was found in the inspected repository root. **This is not proof that the entire repository is unlicensed or original**: dependencies, nested folders and copied code require separate provenance checks. No license is created or changed by this file. Do not add a copyright claim to third-party code.
+At the time of the 2026-10-30 attribution change, no top-level license was found. A proprietary `LICENSE` was added subsequently; see the current license inventory. **This is not proof that the entire repository is unlicensed or original**: dependencies, nested folders and copied code require separate provenance checks. No license is created or changed by this file. Do not add a copyright claim to third-party code.
 
 ## Change protection
 A mandatory GitHub Actions check `founder-attribution-integrity` verifies this file, the founder identity, repository provenance and the README attribution. Repository administrators should additionally enable branch rulesets requiring this check, restricting force pushes and requiring review for changes to `AUTHORS.md`, `LICENSE*`, `NOTICE*`, `COPYING*` and `.github/workflows/founder-attribution-integrity.yml`. A CI workflow alone can be removed by someone with write access; branch ruleset enforcement must be verified separately.

@@ -1,0 +1,32 @@
+name: Jem Competitor Evidence — Verify Strategic Claims
+on:
+  push:
+    branches: [docs/jem-competitor-intelligence-benchmark-20261026]
+    paths:
+      - 'benchmarks/**'
+      - 'test/competitor-evidence.test.mjs'
+      - '.github/workflows/jem-competitor-evidence.yml'
+  pull_request:
+    paths:
+      - 'benchmarks/**'
+      - 'test/competitor-evidence.test.mjs'
+      - '.github/workflows/jem-competitor-evidence.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  independent-dataset-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # pinned SHA
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # pinned SHA
+        with:
+          node-version: '22'
+      - name: Validate machine-readable competitor facts and red-line assertions
+        run: |
+          node --check benchmarks/validate.mjs
+          node benchmarks/validate.mjs
+          node --test test/competitor-evidence.test.mjs

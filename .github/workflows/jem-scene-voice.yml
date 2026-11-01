@@ -1,0 +1,71 @@
+name: Jem Sprints 004-005 — Video Admission & Offline Voice
+on:
+  push:
+    branches: [feat/jem-video-voice-gateway-sprints-004-005-20261026]
+  pull_request:
+    paths:
+      - 'video/**'
+      - 'voice/**'
+      - 'factory/**'
+      - 'originals/**'
+      - 'test/scene-gateway*.mjs'
+      - 'test/voice*.mjs'
+      - 'package.json'
+      - '.github/workflows/jem-scene-voice.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  security-and-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4 pinned
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4 pinned
+        with:
+          node-version: '22'
+      - name: Syntax and negative tests for scene and speech authorization
+        run: |
+          node --check video/model-registry.mjs
+          node --check video/scene-contract.mjs
+          node --check video/scene-review-queue.mjs
+          node --check voice/dialogue.mjs
+          node --check factory/pipeline.mjs
+          npm run video:check
+          npm run voice:check
+  independent-video-boundary-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4 pinned
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4 pinned
+        with:
+          node-version: '22'
+      - name: Free FFmpeg for real clip decoding
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg
+      - name: Decode two actual synthetic videos; verify production remains denied
+        run: npm run video:qa
+  independent-spoken-film-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4 pinned
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4 pinned
+        with:
+          node-version: '22'
+      - name: Free FFmpeg and eSpeak NG synthetic local voice
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg espeak-ng
+          command -v espeak-ng
+          command -v ffmpeg
+      - name: Actually render 60-second spoken cartoon with 6 voiced scenes
+        run: npm run voice:qa
