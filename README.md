@@ -2,7 +2,7 @@
 
 **Jem🌼** is an IMPERIAL Core AI-native animation studio engineering program: Storyboard, original 2D animation, offline image-based camera-motion MP4, FilmFactory, CharacterLock, consent/rights gates, local synthetic speech, and optional *unconnected* image-to-video research adapters.
 
-**Founder · Owner · CEO · Chief Systems Architect:** Alexander Nikolaevich Romaskevich — **RomaskevicH**. Architecture → Implementation → Evidence.
+**Founder · Owner · CEO:** Alexander Nikolaevich Romaskevich — **RomaskevicH**. Architecture → Implementation → Evidence.
 
 [![Jem Enterprise CI](https://github.com/oromaskevic23-cmd/Jem/actions/workflows/jem-enterprise-ci.yml/badge.svg)](https://github.com/oromaskevic23-cmd/Jem/actions/workflows/jem-enterprise-ci.yml)
 
