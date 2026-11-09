@@ -2,6 +2,8 @@
 
 **Jem🌼** is an IMPERIAL Core AI-native animation studio engineering program: Storyboard, original 2D animation, offline image-based camera-motion MP4, FilmFactory, CharacterLock, consent/rights gates, local synthetic speech, and optional *unconnected* image-to-video research adapters.
 
+<img src="https://raw.githubusercontent.com/oromaskevic23-cmd/oromaskevic23-cmd/main/assets/alexander-romaskevich-portrait-20261110.jpg" alt="Alexander Nikolaevich Romaskevich, Founder, Owner and CEO of IMPERIAL Core" width="160" />
+
 **Founder · Owner · CEO:** Alexander Nikolaevich Romaskevich — **RomaskevicH**. Architecture → Implementation → Evidence.
 
 [![Jem Enterprise CI](https://github.com/oromaskevic23-cmd/Jem/actions/workflows/jem-enterprise-ci.yml/badge.svg)](https://github.com/oromaskevic23-cmd/Jem/actions/workflows/jem-enterprise-ci.yml)

@@ -1,6 +1,6 @@
 # Contributing to Jem🌼
 
-Final architecture authority: Alexander Nikolaevich Romaskevich (RomaskevicH), Founder, Owner, CEO and Chief Systems Architect of IMPERIAL Core.
+Final architecture authority: Alexander Nikolaevich Romaskevich (RomaskevicH), Founder, Owner, CEO of IMPERIAL Core.
 
 All GitHub code, documentation, issue/PR text and commit messages are English. Preserve individual Git authorship, third-party licenses and existing branch history.
 
