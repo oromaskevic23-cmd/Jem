@@ -31,6 +31,8 @@
     "cinema:check": "node --experimental-sqlite --test test/character-lock.test.mjs test/ltx-offline-worker.test.mjs test/cinema-session.test.mjs",
     "cinema:verify": "npm run cinema:check && npm run video:check && npm run factory:test",
     "enterprise:verify": "node --test test/enterprise-attest.integration.test.mjs",
-    "enterprise:attest": "node enterprise/cli.mjs"
+    "enterprise:attest": "node enterprise/cli.mjs",
+    "demo:assemble": "node src/demo-cli.mjs",
+    "demo:test": "node --test test/demo-video.integration.test.mjs"
   }
 }

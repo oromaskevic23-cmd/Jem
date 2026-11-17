@@ -48,6 +48,14 @@ npm start
 
 Desktop studio (local only): `http://127.0.0.1:8765`. PWA preview: `npm run preview:pwa` on `http://127.0.0.1:8766`. Access outside the operator's local machine is not supported.
 
+## Local demo editing
+
+Jem can assemble operator-provided MP4 recordings into a single H.264 demo,
+attach optional WAV narration, and export separate SRT captions. It records
+input and output hashes and checks video dimensions, frame count and duration.
+It does not record the screen or publish the result. See the
+[demo editor guide](docs/JEM_DEMO_EDITOR.md).
+
 ## Enterprise Film Proof from actual MP4
 
 Once a local camera-motion film has been rendered, Jem can independently re-read its
